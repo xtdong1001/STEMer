@@ -12,7 +12,7 @@ import com.xdong.model.Position;
 
 @Service
 @Transactional
-public class PositionService implements IGenericService<Position> {
+public class PositionService implements IPositionService<Position> {
 
 	PositionDao positionDao;
 
@@ -43,8 +43,7 @@ public class PositionService implements IGenericService<Position> {
 
 	@Override
 	public void add(Position position) {
-		positionDao.add(position);
-	}
+  	}
 
 	@Override
 	public void delete(Position position) {
@@ -59,6 +58,11 @@ public class PositionService implements IGenericService<Position> {
 	@Override
 	public List getAllLimit(int start, int offset) {
 		return positionDao.getAllLimit(start, offset);
+	}
+
+	@Override
+	public List getByCompanyId(int companyId, int start, int offset) {
+		return positionDao.getByCompanyId(companyId, start, offset);
 	}
 
 }

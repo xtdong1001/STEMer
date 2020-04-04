@@ -8,13 +8,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.xdong.model.Position;
 
 @Repository
-public class PositionDao implements IGenericDao<Position>{
+public class PositionDao implements IPositionDao<Position>{
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -69,6 +70,17 @@ public class PositionDao implements IGenericDao<Position>{
 	public List getAllLimit(int start, int offset) {
 		return getSession()
 				.createCriteria(Position.class)
+				.setMaxResults(offset)
+				.setFirstResult(start)
+				.addOrder(Order.desc("publishTime"))
+				.list();
+	}
+
+	@Override
+	public List getByCompanyId(int companyId, int start, int offset) {
+		return getSession()
+				.createCriteria(Position.class)
+				.add(Restrictions.eq("companyId", companyId))
 				.setMaxResults(offset)
 				.setFirstResult(start)
 				.addOrder(Order.desc("publishTime"))

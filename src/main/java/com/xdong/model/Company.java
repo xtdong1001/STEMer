@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 // Generated 2020-3-28 16:14:24 by Hibernate Tools 5.4.12.Final
@@ -61,6 +62,7 @@ public class Company implements java.io.Serializable {
 	private String logoPath;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="company")
+	@OrderBy("publishTime DESC")
 	private List<Position> positions;
 
 	public Company() {

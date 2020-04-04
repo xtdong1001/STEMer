@@ -11,12 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xdong.model.Company;
 import com.xdong.model.Position;
 import com.xdong.service.IGenericService;
+import com.xdong.service.IPositionService;
 
 @Controller
 public class IndexController {
 	
 	@Autowired
-	IGenericService<Position> positionService;
+	IPositionService<Position> positionService;
 	@Autowired
 	IGenericService<Company> companyService;
 	

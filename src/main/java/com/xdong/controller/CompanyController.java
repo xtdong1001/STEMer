@@ -48,7 +48,7 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView("companyDetailed_user");
 		Company company = companyService.getById(id);
 		mav.addObject("company", company);
-
+		mav.addObject("positions", company.getPositions());
 		return mav;
 	}
 

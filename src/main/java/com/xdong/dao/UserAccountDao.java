@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.xdong.model.UserAccount;
 
 @Repository
-public class UserAccountDao implements IUserAccountDao{
+public class UserAccountDao implements IUserAccountDao<UserAccount>{
 
 	@Autowired
 	private SessionFactory sessionFactory;

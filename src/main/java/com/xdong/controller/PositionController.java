@@ -12,13 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xdong.model.Position;
 import com.xdong.service.IGenericService;
+import com.xdong.service.IPositionService;
 
 @Controller
 @RequestMapping(value = "/position")
 public class PositionController {
 
 	@Autowired
-	IGenericService<Position> positionService;
+	IPositionService<Position> positionService;
 	private static final int MAXPOSITION_USER = 12;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -33,6 +34,18 @@ public class PositionController {
 	@RequestMapping(value = "/list/{page}", method = RequestMethod.GET)
 	public ModelAndView listLimit(@PathVariable("page") int page) {
 		List positions = positionService.getAllLimit((page-1)*MAXPOSITION_USER, MAXPOSITION_USER);
+		int maxpages = (int)Math.ceil((double)positionService.getCount()/MAXPOSITION_USER);
+		
+		ModelAndView model = new ModelAndView("positions_user");
+		model.addObject("positions", positions);
+		model.addObject("pages", maxpages);
+		model.addObject("currentPage", page);
+		return model;
+	}
+	
+	@RequestMapping(value = "/list/company/{companyId}/{page}", method = RequestMethod.GET)
+	public ModelAndView listByCompanyLimit(@PathVariable("companyId") int companyId, @PathVariable("page") int page) {
+		List positions = positionService.getByCompanyId(companyId, (page-1)*MAXPOSITION_USER, MAXPOSITION_USER);
 		int maxpages = (int)Math.ceil((double)positionService.getCount()/MAXPOSITION_USER);
 		
 		ModelAndView model = new ModelAndView("positions_user");
