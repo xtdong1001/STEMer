@@ -66,15 +66,15 @@
 
 				<div class="row">
 					<label class="mr-sm-2 mb-0" for="Email"><strong>Email
-							Address:</strong></label> <input type="email"
+							Address*:</strong></label> <input type="email"
 						class="form-control mr-sm-2 mb-2 mb-sm-0" id="email" name="email"
-						placeholder="Email Address">
+						placeholder="Email Address" required>
 					<span id='emailErr' style="color:red;font-size:80%;"></span>
 				</div>
 				<div class="row">
-					<label class="mr-sm-2 mb-0" for="Password1"><strong>Password:</strong></label>
+					<label class="mr-sm-2 mb-0" for="Password1"><strong>Password*:</strong></label>
 					<input type="password" class="form-control mr-sm-2 mb-2 mb-sm-0"
-						id="password" name="password" placeholder="Password">
+						id="password" name="password" placeholder="Password" required>
 				</div>
 				
 				<div class="row">
@@ -95,7 +95,7 @@
 					<span id='radioErr' style="color:red;font-size:80%;"></span>
 				</div>
 
-
+				<br>
 				<div class="btn-style">
 					<button class="btn btn-secondary btn-lg btn-block" type="submit"
 						onclick="return onclick_submit()">Log In</button>

@@ -2,7 +2,9 @@ package com.xdong.model;
 // Generated 2020-3-28 16:14:24 by Hibernate Tools 5.4.12.Final
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -46,6 +50,10 @@ public class Position implements java.io.Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name="companyId")
 	private Company company;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="position")
+	@OrderBy("applicationTime")
+	private List<Application> applications;
 	
 	public Position() {
 	}
@@ -142,4 +150,12 @@ public class Position implements java.io.Serializable {
 		this.company = company;
 	}
 
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
+	}
+	
 }

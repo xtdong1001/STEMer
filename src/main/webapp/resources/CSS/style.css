@@ -158,3 +158,26 @@ tbody td{
 .err {
 	border-color: red;
 }
+
+.apply_card {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    border-style:ridge;
+    border-radius: 3px;
+    background-color: #EFF4F9;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+.custom-file-upload {
+	border: 1px solid #ccc;
+	display: inline-block;
+	padding: 6px 12px;
+	cursor: pointer;
+}

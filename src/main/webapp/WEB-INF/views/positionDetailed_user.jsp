@@ -15,8 +15,8 @@
 				<p>Company: <a href="${pageContext.request.contextPath}/company/${requestScope.position.company.companyId }">${requestScope.position.company.name }</a></p>
 				<p>Work Location: ${requestScope.position.company.city } ${requestScope.position.company.state }, ${requestScope.position.company.zipcode } ${requestScope.position.company.country }</p>
 				<p>Posted on: ${requestScope.position.publishTime }</p>
-				<a type="button" class="btn btn-primary"
-					href="${pageContext.request.contextPath}/apply/${requestScope.position.positionId}">&nbsp&nbsp&nbsp&nbspApply&nbsp&nbsp&nbsp&nbsp</a>
+				<a type="button" class="btn btn-primary" style="padding-left:30px; padding-right:30px"
+					href="${pageContext.request.contextPath}/apply/${requestScope.position.positionId}">Apply</a>
 			</div>
 		</div>
 	</div>
@@ -43,8 +43,8 @@
 		</li>
 		<li style="min-height: 60px" align="center"><a type="button"
 			class="btn btn-primary"
-			href="applyJop.jsp/${requestScope.position.positionId}"
-			style="margin-top: 10px">&nbsp&nbsp&nbsp&nbspApply&nbsp&nbsp&nbsp&nbsp</a>
+			href="${pageContext.request.contextPath}/apply/${requestScope.position.positionId}"
+			style="margin-top: 10px; padding-left:30px; padding-right:30px">Apply</a>
 		</li>
 	</ul>
 </div>

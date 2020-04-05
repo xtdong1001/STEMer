@@ -1,106 +1,129 @@
 <%@ include file="includes/header.jsp"%>
-<FORM method="post" action="ApplyForJob.php?positionID='.$positionID.'">
-	<div class="outsider">
-		<h1 class="header2">
-			<strong><span class="glyphicon glyphicon-file"></span>&nbspApplication</strong>
-		</h1>
-
-		<div class="grey">
-			<h1>
-				<br>
-			</h1>
-			<div class="container-fluid">
-				<div class="form-check form-check-inline">
-					<div class="form-check">
-						<label><strong>First Name*&nbsp&nbsp</strong></label> <input
-							type="text" id="first_name" name="first_name">
-
-					</div>
-
-					<div class="form-check">
-						<label><strong>Last Name*&nbsp&nbsp</strong></label> <input
-							type="text" id="last_name" name="last_name">
-
-					</div>
-				</div>
-				<div class="row">
-					<label><strong>Contact Email*&nbsp&nbsp</strong></label> <input
-						type="email" id="email" name="email">
-				</div>
-				<div class="row">
-					<label><strong>Phone*&nbsp&nbsp</strong></label> <input type="text"
-						id="last_name" name="phone">
-				</div>
-				<div class="row">
-					<label><strong>Address*&nbsp&nbsp</strong></label> <input
-						type="text" id="address" name="address">
-				</div>
-
-				<div class="form-check form-check-inline">
-					<div class="form-check">
-						<label><strong>City*&nbsp&nbsp</strong></label> <input type="text"
-							id="city" name="city">
-
-					</div>
-
-					<div class="form-check">
-						<label><strong>State*&nbsp&nbsp</strong></label> <input
-							type="text" id="state" name="state">
-					</div>
-					<div class="form-check">
-						<label><strong>Zip Code*&nbsp&nbsp</strong></label> <input
-							type="text" id="zipcode" name="zipcode">
-
-
-					</div>
-				</div>
-				<div class="row">
-					<label><strong>Country*&nbsp&nbsp</strong></label> <input
-						type="text" id="country" name="country">
-				</div>
-
-
-			</div>
+<form:form method="post" action="${pageContext.request.contextPath}/application/submit" modelAttribute="application">
+	<!-- 	<div class="card"
+		style="margin-left: 15%; max-width: 70%; margin-top: 30px; padding: 4%;"> -->
+	<div>
+		<div style="width: 100%; text-align: center; padding-top: 30px;">
+			<h1>Application</h1>
 		</div>
 
+		<div class="apply_card card">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="form-group col-lg-6 mb-4">
+						<form:label for="firstName" path="firstName">First Name*:</form:label> <form:input type="text"
+							class="form-control" id="firstName" placeholder="First name"
+							path="firstName" name="firstName" />
+					</div>
+					<div class="form-group col-lg-6 mb-4">
+						<form:label path="lastName">Last Name*:</form:label> <form:input type="text"
+							class="form-control" id="lastName" placeholder="Last name"
+							path="lastName" name="lastName"  />
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-12 mb-4">
+						<form:label path="email">Email*:</form:label> <form:input type="text"
+							class="form-control" id="email" placeholder="xxx@domain.com"
+							path="email" name="email"  />
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-12 mb-4">
+						<form:label path="phone">Phone*:</form:label> <form:input type="text"
+							class="form-control" id="phone" placeholder="(xxx)-xxx-xxxx"
+							path="phone" name="phone"  />
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-12 mb-4">
+						<form:label path="address">Address*:</form:label> <form:input type="text"
+							class="form-control" id="address" placeholder="street, apt"
+							path="address" name="address"  />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-lg-6 mb-4">
+						<form:label path="city">City*:</form:label> <form:input type="text"
+							class="form-control" id="city" placeholder="City"
+							path="city" name="city"   />
+					</div>
+					<div class="form-group col-lg-6 mb-4">
+						<form:label path="state">State*:</form:label> <form:input type="text"
+							class="form-control" id="state" placeholder="State"
+							path="state" name="state"  />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-lg-6 mb-4">
+						<form:label path="zipcode">Zip Code*:</form:label> <form:input type="text"
+							class="form-control" id="zipcode" placeholder="xxxxx"
+							path="zipcode" name="zipcode"  />
+					</div>
+					<div class="form-group col-lg-6 mb-4">
+						<form:label path="country">Country*:</form:label> <form:input type="text"
+							class="form-control" id="country" placeholder="Country"
+							path="country" name="country"  />
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
-
-	<div class="outsider">
-		<h3>Reference*</h3>
-		<div class="grey">
-
-			<div class="container-fluid">
-				<br>
-				<div class="row">
-					<h4>Resume&nbsp&nbsp</h4>
-
-
-					<input type="submit" value="Upload" name="submit">
-
-				</div>
-
-
-				<div class="row">
-					<label><strong>Date Available&nbsp&nbsp</strong></label> <input
-						type="text" id="date" name="date">
-				</div>
-				<div class="row">
-					<label><strong>Website, Blog or
-							Portfolio&nbsp&nbsp</strong></label> <input type="text" id="website"
-						name="website">
+		<div class="apply_card card">
+		<div class="container-fluid">
+			<br>
+			<div class="row">
+				<div class="form-group col-lg-12 mb-4 ">
+				<form:label path="resume">Resume:</form:label>
+				<div class="custom-file">
+					<form:input type="file" class="custom-file-input" id="customFile" path="resume" name="resume"/>
+    				<label class="custom-file-label" for="customFile">Choose file</label>
+    				</div>
 				</div>
 			</div>
+			
+		
 
-
+			<div class="row">
+				<div class="form-group col-lg-4 mb-4">
+					<form:label path="workBeginDate">Begin Date:</form:label> <form:input type="text"
+						class="form-control" id="workBeginDate" placeholder="MM/DD/YYY"
+						path="workBeginDate" name="workBeginDate" />
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-lg-12 mb-4">
+					<form:label path="website">Website, Blog or Portfolio:</form:label> <form:input type="text"
+						class="form-control" id="website" placeholder="website"
+						path="website" name="website"  />
+				</div>
+			</div>
 		</div>
-
-
-		<p align="center">
-			<input type="submit" name="submit" value="Submit" />
-		</p>
-		<input type="hidden" name="submitted" value="TRUE" /> <input
-			type="hidden" name="id" value="\' . $id . \'" />
-</FORM>
-
+	</div>
+	<form:input type="hidden" path="position.positionId" name="positionId" value="${requestScope.positionId }"/>
+	<form:input type="hidden" path="userAccount.userId" name="userId" value="${sessionScope.userId }"/>
+	<p align="center">
+		<input class="btn btn-primary" type="submit" name="submit" value="Submit" />
+	</p>
+</form:form>
+<script>
+	$(".custom-file-input").on("change", function() {
+	  var fileName = $(this).val().split("\\").pop();
+	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+    $(document).ready(function(){
+      var date_input=$('input[name="workBeginDate"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    });
+</script>
 <%@ include file="includes/footer.jsp"%>

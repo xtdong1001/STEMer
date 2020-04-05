@@ -3,10 +3,13 @@ package com.xdong.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,35 +22,41 @@ public class Application implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer applicationId;
-	
-	private int userId;
-	private int positionId;
+
+	@Column(name="firstName")
 	private String firstName;
+	
 	private String lastName;
-	private String contactEmail;
+	private String email;
 	private String phone;
 	private String address;
 	private String city;
 	private String state;
-	private int zipcode;
+	private String zipcode;
 	private String country;
-	private String resumePath;
+	private String resume;
 	private String workBeginDate;
-	private String applicantWebsite;
+	private String website;
 	private String status;
-	private Date applicationTime;
+	private Date applyTime;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name="userId")
+	private UserAccount userAccount;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name="positionId")
+	private Position position;
 
 	public Application() {
 	}
 
 	public Application(int userId, int positionId, String firstName, String lastName, String contactEmail, String phone,
-			String address, String city, String state, int zipcode, String country, String status,
+			String address, String city, String state, String zipcode, String country, String status,
 			Date applicationTime) {
-		this.userId = userId;
-		this.positionId = positionId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.contactEmail = contactEmail;
+		this.email = contactEmail;
 		this.phone = phone;
 		this.address = address;
 		this.city = city;
@@ -55,56 +64,38 @@ public class Application implements java.io.Serializable {
 		this.zipcode = zipcode;
 		this.country = country;
 		this.status = status;
-		this.applicationTime = applicationTime;
+		this.applyTime = applicationTime;
 	}
 
 	public Application(int userId, int positionId, String firstName, String lastName, String contactEmail, String phone,
-			String address, String city, String state, int zipcode, String country, String resumePath,
+			String address, String city, String state, String zipcode, String country, String resumePath,
 			String workBeginDate, String applicantWebsite, String status, Date applicationTime) {
-		this.userId = userId;
-		this.positionId = positionId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.contactEmail = contactEmail;
+		this.email = contactEmail;
 		this.phone = phone;
 		this.address = address;
 		this.city = city;
 		this.state = state;
 		this.zipcode = zipcode;
 		this.country = country;
-		this.resumePath = resumePath;
+		this.resume = resumePath;
 		this.workBeginDate = workBeginDate;
-		this.applicantWebsite = applicantWebsite;
+		this.website = applicantWebsite;
 		this.status = status;
-		this.applicationTime = applicationTime;
+		this.applyTime = applicationTime;
 	}
 
 	public Integer getApplicationId() {
-		return this.applicationId;
+		return applicationId;
 	}
 
 	public void setApplicationId(Integer applicationId) {
 		this.applicationId = applicationId;
 	}
 
-	public int getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getPositionId() {
-		return this.positionId;
-	}
-
-	public void setPositionId(int positionId) {
-		this.positionId = positionId;
-	}
-
 	public String getFirstName() {
-		return this.firstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -112,23 +103,23 @@ public class Application implements java.io.Serializable {
 	}
 
 	public String getLastName() {
-		return this.lastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public String getContactEmail() {
-		return this.contactEmail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setContactEmail(String contactEmail) {
-		this.contactEmail = contactEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPhone() {
-		return this.phone;
+		return phone;
 	}
 
 	public void setPhone(String phone) {
@@ -136,7 +127,7 @@ public class Application implements java.io.Serializable {
 	}
 
 	public String getAddress() {
-		return this.address;
+		return address;
 	}
 
 	public void setAddress(String address) {
@@ -144,7 +135,7 @@ public class Application implements java.io.Serializable {
 	}
 
 	public String getCity() {
-		return this.city;
+		return city;
 	}
 
 	public void setCity(String city) {
@@ -152,67 +143,85 @@ public class Application implements java.io.Serializable {
 	}
 
 	public String getState() {
-		return this.state;
+		return state;
 	}
 
 	public void setState(String state) {
 		this.state = state;
 	}
 
-	public int getZipcode() {
-		return this.zipcode;
+	public String getZipcode() {
+		return zipcode;
 	}
 
-	public void setZipcode(int zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 
 	public String getCountry() {
-		return this.country;
+		return country;
 	}
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
-	public String getResumePath() {
-		return this.resumePath;
+	public String getResume() {
+		return resume;
 	}
 
-	public void setResumePath(String resumePath) {
-		this.resumePath = resumePath;
+	public void setResume(String resume) {
+		this.resume = resume;
 	}
 
 	public String getWorkBeginDate() {
-		return this.workBeginDate;
+		return workBeginDate;
 	}
 
 	public void setWorkBeginDate(String workBeginDate) {
 		this.workBeginDate = workBeginDate;
 	}
 
-	public String getApplicantWebsite() {
-		return this.applicantWebsite;
+	public String getWebsite() {
+		return website;
 	}
 
-	public void setApplicantWebsite(String applicantWebsite) {
-		this.applicantWebsite = applicantWebsite;
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 	public String getStatus() {
-		return this.status;
+		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public Date getApplicationTime() {
-		return this.applicationTime;
+	public Date getApplyTime() {
+		return applyTime;
 	}
 
-	public void setApplicationTime(Date applicationTime) {
-		this.applicationTime = applicationTime;
+	public void setApplyTime(Date applyTime) {
+		this.applyTime = applyTime;
 	}
 
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+	
+	
 }

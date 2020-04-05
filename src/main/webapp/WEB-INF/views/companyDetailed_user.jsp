@@ -33,8 +33,8 @@
 </div>
 
 <p id="jumpTo"></p>
-<div id="section1" class="container-fluid rounded position">
-	<h5 style="padding-bottom: 30px;">PUBLISHED POSITIONS</h5>
+<div id="section1" class="card rounded-0 container-fluid position" style="background-color: white;">
+	<h4 style="padding-bottom: 30px;">Published Positions</h4>
 	<div class="row" style="padding-bottom: 20px;">
 		<c:forEach items="${requestScope.positions}" var="position">
 			<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
