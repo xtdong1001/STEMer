@@ -1,21 +1,28 @@
 package com.xdong.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xdong.model.Application;
 import com.xdong.service.IGenericService;
+import com.xdong.validator.ApplicationValidator;
 import com.xdong.service.IApplicationService;
 
 @Controller
@@ -23,7 +30,9 @@ public class ApplicationController {
 
 	@Autowired
 	IApplicationService<Application> applicationService;
+	
 	private static final int MAXPOSITION_USER = 12;
+	public static final String archivePath = "D:/xtdong/grad/6250 Web dev tools/Archive";
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -73,7 +82,7 @@ public class ApplicationController {
 	}
 
 	@RequestMapping(value = "/apply/{positionId}", method = RequestMethod.GET)
-	public ModelAndView onGet(HttpServletRequest request, HttpServletResponse response, @PathVariable("positionId") int positionId) {
+	public ModelAndView showForm(HttpServletRequest request, @PathVariable("positionId") int positionId) {
 		if(request.getSession(false) == null || request.getSession(false).getAttribute("userId") == null) {
 			return new ModelAndView("login");
 		}
@@ -85,11 +94,36 @@ public class ApplicationController {
 	}
 
 	@RequestMapping(value = "/application/submit", method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("application") Application application) {
+	public ModelAndView handleForm(@ModelAttribute("application") Application application, BindingResult result, HttpServletRequest request) {
+		System.out.println(application.getResume());
+		applicationService.validate(application, result);
+		
+		if(result.hasErrors()) {
+			ModelAndView mav = new ModelAndView("apply");
+			mav.addObject("application", application);
+			mav.addObject("positionId", application.getPosition().getPositionId());
+			return mav;
+		}
+			 
 		application.setApplyTime(new Date());
 		application.setStatus("Pending");
+		
+		CommonsMultipartFile resume = application.getResume();
+		String filename = resume.getOriginalFilename();
+		filename = FilenameUtils.removeExtension(filename) 
+				+ "_" + request.getSession(false).getAttribute("userId")
+				+ "_" + Calendar.getInstance().getTimeInMillis() 
+				+ "." + FilenameUtils.getExtension(filename);
+		application.setResumePath(filename);
+		File file = new File(archivePath, filename);
+		try {
+			resume.transferTo(file);
+		} catch (IllegalStateException | IOException e) {
+			return new ModelAndView("error");
+		}
+		
 		applicationService.saveOrUpdate(application);
 
-		return new ModelAndView("welcome");
+		return new ModelAndView("apply_success");
 	}
 }

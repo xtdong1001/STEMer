@@ -2,6 +2,8 @@ package com.xdong.service;
 
 import java.util.List;
 
+import org.springframework.validation.Errors;
+
 public interface IApplicationService<T> {
 	public abstract List getAll();
 	public abstract T getById(int id);
@@ -11,4 +13,5 @@ public interface IApplicationService<T> {
 	public abstract void delete(T entity);
 	public abstract int getCount();
 	public abstract List getAllLimit(int start, int offset);
+	public void validate(Object target, Errors errors);
 }

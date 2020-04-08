@@ -13,7 +13,6 @@ import com.xdong.model.Position;
 @Service
 @Transactional
 public class PositionService implements IPositionService<Position> {
-
 	PositionDao positionDao;
 
 	@Autowired

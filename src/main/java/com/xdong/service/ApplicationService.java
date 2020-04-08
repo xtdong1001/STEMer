@@ -6,19 +6,23 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import com.xdong.dao.ApplicationDao;
 import com.xdong.model.Application;
+import com.xdong.validator.ApplicationValidator;
 
 @Service
 @Transactional
 public class ApplicationService implements IApplicationService<Application> {
 
 	ApplicationDao ApplicationDao;
+	ApplicationValidator applicationValidator;
 
 	@Autowired
-	public void setCustomerDao(ApplicationDao ApplicationDao) {
+	public void setCustomerDao(ApplicationDao ApplicationDao, ApplicationValidator validator) {
 		this.ApplicationDao = ApplicationDao;
+		applicationValidator = validator;
 	}
 
 	@Override
@@ -58,5 +62,10 @@ public class ApplicationService implements IApplicationService<Application> {
 	@Override
 	public List getAllLimit(int start, int offset) {
 		return ApplicationDao.getAllLimit(start, offset);
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		applicationValidator.validate(target, errors);
 	}
 }
