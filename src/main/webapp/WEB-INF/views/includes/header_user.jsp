@@ -24,7 +24,7 @@
 				<a class="nav-link" href="${pageContext.request.contextPath}/position/list/1" style="color: white;">Job</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="list_application_userside.php" style="color: white;">Applications</a>
+				<a class="nav-link" href="${pageContext.request.contextPath}/user/applications" style="color: white;">Applications</a>
 			</li>   
 		</ul>
 	              

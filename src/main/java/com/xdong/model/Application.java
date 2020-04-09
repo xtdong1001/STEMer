@@ -2,7 +2,9 @@ package com.xdong.model;
 // Generated 2020-3-28 16:14:24 by Hibernate Tools 5.4.12.Final
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -42,6 +47,10 @@ public class Application implements java.io.Serializable {
 	private String website;
 	private String status;
 	private Date applyTime;
+	private String result;
+	private Date interviewTime;
+	private String interviewLocation;
+	private String comments;
 	
 	@Transient
 	private CommonsMultipartFile resume;
@@ -55,41 +64,6 @@ public class Application implements java.io.Serializable {
 	private Position position;
 
 	public Application() {
-	}
-
-	public Application(int userId, int positionId, String firstName, String lastName, String contactEmail, String phone,
-			String address, String city, String state, String zipcode, String country, String status,
-			Date applicationTime) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = contactEmail;
-		this.phone = phone;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zipcode = zipcode;
-		this.country = country;
-		this.status = status;
-		this.applyTime = applicationTime;
-	}
-
-	public Application(int userId, int positionId, String firstName, String lastName, String contactEmail, String phone,
-			String address, String city, String state, String zipcode, String country, String resumePath,
-			String workBeginDate, String applicantWebsite, String status, Date applicationTime) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = contactEmail;
-		this.phone = phone;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zipcode = zipcode;
-		this.country = country;
-		this.resumePath = resumePath;
-		this.workBeginDate = workBeginDate;
-		this.website = applicantWebsite;
-		this.status = status;
-		this.applyTime = applicationTime;
 	}
 
 	public Integer getApplicationId() {
@@ -234,6 +208,38 @@ public class Application implements java.io.Serializable {
 
 	public void setResume(CommonsMultipartFile resume) {
 		this.resume = resume;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public Date getInterviewTime() {
+		return interviewTime;
+	}
+
+	public void setInterviewTime(Date interviewTime) {
+		this.interviewTime = interviewTime;
+	}
+
+	public String getInterviewLocation() {
+		return interviewLocation;
+	}
+
+	public void setInterviewLocation(String interviewLocation) {
+		this.interviewLocation = interviewLocation;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	

@@ -35,7 +35,7 @@ public class UserAccount implements java.io.Serializable {
 	private String accountType;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="userAccount")
-	@OrderBy("applicationTime DESC")
+	@OrderBy("applyTime DESC")
 	private List<Application> applications;
 	
 	public UserAccount() {

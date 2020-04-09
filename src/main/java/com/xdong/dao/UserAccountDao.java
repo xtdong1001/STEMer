@@ -30,6 +30,7 @@ public class UserAccountDao implements IUserAccountDao<UserAccount>{
 	@Override
 	public UserAccount getById(int id) {
 		UserAccount userAccount = (UserAccount)getSession().get(UserAccount.class, id);
+		userAccount.getApplications().size();
 		return userAccount;
 	}
 

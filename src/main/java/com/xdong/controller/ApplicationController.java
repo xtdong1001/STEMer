@@ -56,12 +56,16 @@ public class ApplicationController {
 	}
 
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView get(@PathVariable("id") int id) {
-		ModelAndView mav = new ModelAndView("applicationDetailed_user");
+	@RequestMapping(value = "application/{id}", method = RequestMethod.GET)
+	public ModelAndView get(@PathVariable("id") int id, HttpServletRequest request) {
+		
 		Application application = applicationService.getById(id);
+		if(request.getSession(false) == null || request.getSession(false).getAttribute("userId") == null)
+			return new ModelAndView("login");
+//		else if(request.getSession(false).getAttribute("userId") != application.getUserAccount().getUserId())
+//			return new ModelAndView("error");
+		ModelAndView mav = new ModelAndView("applicationDetailed_user");
 		mav.addObject("application", application);
-
 		return mav;
 	}
 

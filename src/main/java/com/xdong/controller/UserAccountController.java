@@ -1,5 +1,7 @@
 package com.xdong.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,5 +60,15 @@ public class UserAccountController {
 			session.setAttribute("accountType", userAccount.getAccountType());
 			return new ModelAndView("welcome");
 		}
+	}
+	
+	@RequestMapping(value = "/user/applications", method = RequestMethod.GET)
+	public ModelAndView getUserApplications(HttpServletRequest request) {
+		if(request.getSession(false) == null || request.getSession(false).getAttribute("userId") == null)
+			return new ModelAndView("login");
+		List applications = userAccountService.getById((int)request.getSession(false).getAttribute("userId")).getApplications();
+		ModelAndView mav = new ModelAndView("applications_user");
+		mav.addObject("applications", applications);
+		return mav;
 	}
 }
