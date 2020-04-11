@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -24,9 +25,6 @@ public class Company implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer companyId;
-	
-	@Column(name="accountId")
-	private int accountId;
 	
 	@Column(name="name")
 	private String name;
@@ -64,18 +62,16 @@ public class Company implements java.io.Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="company")
 	@OrderBy("publishTime DESC")
 	private List<Position> positions;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy="company")
+	private CompanyAccount companyAccount;
 
 	public Company() {
 	}
 
-	public Company(int accountId) {
-		this.accountId = accountId;
-	}
-
-	public Company(int accountId, String name, String address, String city, String state, String zipcode,
+	public Company(String name, String address, String city, String state, String zipcode,
 			String country, String foundYear, String industry, String description, String websiteAddr,
 			String logoPath) {
-		this.accountId = accountId;
 		this.name = name;
 		this.address = address;
 		this.city = city;
@@ -95,14 +91,6 @@ public class Company implements java.io.Serializable {
 
 	public void setCompanyId(Integer companyId) {
 		this.companyId = companyId;
-	}
-
-	public int getAccountId() {
-		return this.accountId;
-	}
-
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
 	}
 
 	public String getName() {

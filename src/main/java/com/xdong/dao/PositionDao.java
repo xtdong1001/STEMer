@@ -27,7 +27,7 @@ public class PositionDao implements IPositionDao<Position>{
 	@Override
 	public List getAll() {
 		Criteria criteria = getSession().createCriteria(Position.class);
-		return (List)criteria.list();
+		return (List)criteria.add(Restrictions.eq("isAvailable", true)).list();
 	}
 
 	@Override
@@ -70,6 +70,7 @@ public class PositionDao implements IPositionDao<Position>{
 	public List getAllLimit(int start, int offset) {
 		return getSession()
 				.createCriteria(Position.class)
+				.add(Restrictions.eq("isAvailable", true))
 				.setMaxResults(offset)
 				.setFirstResult(start)
 				.addOrder(Order.desc("publishTime"))

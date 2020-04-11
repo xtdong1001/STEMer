@@ -99,7 +99,6 @@ public class ApplicationController {
 
 	@RequestMapping(value = "/application/submit", method = RequestMethod.POST)
 	public ModelAndView handleForm(@ModelAttribute("application") Application application, BindingResult result, HttpServletRequest request) {
-		System.out.println(application.getResume());
 		applicationService.validate(application, result);
 		
 		if(result.hasErrors()) {

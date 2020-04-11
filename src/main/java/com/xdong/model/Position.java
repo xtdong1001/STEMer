@@ -46,6 +46,8 @@ public class Position implements java.io.Serializable {
 	
 	@Column(name="publishTime")
 	private Date publishTime;
+	
+	private boolean isAvailable;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name="companyId")
@@ -157,5 +159,15 @@ public class Position implements java.io.Serializable {
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
 	}
+
+	public boolean getIsAvailable() {
+		return isAvailable;
+	}
+
+	public void setIsAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+
+
 	
 }

@@ -6,6 +6,9 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,7 +33,6 @@ public class UserAccountDao implements IUserAccountDao<UserAccount>{
 	@Override
 	public UserAccount getById(int id) {
 		UserAccount userAccount = (UserAccount)getSession().get(UserAccount.class, id);
-		userAccount.getApplications().size();
 		return userAccount;
 	}
 
@@ -56,10 +58,27 @@ public class UserAccountDao implements IUserAccountDao<UserAccount>{
 	}
 
 	@Override
-	public int validate(UserAccount userAccount) {
-		UserAccount result = (UserAccount) getSession().createCriteria(UserAccount.class).add(Example.create(userAccount)).uniqueResult();
+	public int check(UserAccount userAccount) {
+		Integer result = (Integer) getSession()
+				.createCriteria(UserAccount.class)
+				.setProjection(Projections.property("userId"))
+				.add(Example.create(userAccount))
+				.uniqueResult();
 		if(result != null)
-			return result.getUserId();
+			return result;
+		else
+			return -1;
+	}
+
+	@Override
+	public int checkEmailExist(String email) {
+		Integer result = (Integer) getSession()
+				.createCriteria(UserAccount.class)
+				.setProjection(Projections.property("userId"))
+				.add(Restrictions.eq("email", email))
+				.uniqueResult();
+		if(result != null)
+			return result;
 		else
 			return -1;
 	}

@@ -40,6 +40,16 @@
 			<p>
 				From <span class="badge badge-warning">${requestScope.position.salaryLow}</span> to <span class="badge badge-success">${requestScope.position.salaryHigh}</span>
 			</p>
+			<h5 style="color: gray" class="card-title">position status</h5>
+			<c:choose>
+			<c:when test="${requestScope.position.isAvailable=='true'}">
+			<p>Available</p>
+			</c:when>
+			<c:otherwise>
+			<p>Closed</p>
+			</c:otherwise>
+			</c:choose>
+			<p>${requestScope.position.responsibility}</p>
 		</li>
 		<li style="min-height: 60px" align="center"><a type="button"
 			class="btn btn-primary"

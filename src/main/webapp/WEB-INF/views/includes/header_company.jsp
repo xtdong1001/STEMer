@@ -31,7 +31,7 @@
 	</a>
 		<div class="dropdown-menu dropdown-menu-right ">
 			<a class="dropdown-item" href="view_company_companyside.php">My Company</a>
-			<a class="dropdown-item" href="Log_out.php">Log Out</a>
+			<a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Log Out</a>
 		</div>
 	</div>
 </nav>

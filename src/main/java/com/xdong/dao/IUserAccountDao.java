@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xdong.model.UserAccount;
+import com.xdong.model.IndividualAccount;
 
 public interface IUserAccountDao<T extends Serializable>  {
 	public abstract List getAll();
@@ -16,5 +16,6 @@ public interface IUserAccountDao<T extends Serializable>  {
 	public abstract void saveOrUpdate(T entity);
 	public abstract void deleteById(int id);
 	public abstract void delete(T entity);
-	public abstract int validate(T entity);
+	public abstract int check(T entity);
+	public int checkEmailExist(String email);
 }

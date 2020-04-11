@@ -11,4 +11,5 @@ public interface IGenericService<T> {
 	public abstract void delete(T entity);
 	public abstract int getCount();
 	public abstract List getAllLimit(int start, int offset);
+	
 }

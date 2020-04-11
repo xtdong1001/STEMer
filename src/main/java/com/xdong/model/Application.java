@@ -57,7 +57,7 @@ public class Application implements java.io.Serializable {
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name="userId")
-	private UserAccount userAccount;
+	private IndividualAccount individualAccount;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name="positionId")
@@ -186,12 +186,12 @@ public class Application implements java.io.Serializable {
 		this.applyTime = applyTime;
 	}
 
-	public UserAccount getUserAccount() {
-		return userAccount;
+	public IndividualAccount getUserAccount() {
+		return individualAccount;
 	}
 
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
+	public void setUserAccount(IndividualAccount individualAccount) {
+		this.individualAccount = individualAccount;
 	}
 
 	public Position getPosition() {
