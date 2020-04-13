@@ -60,8 +60,8 @@ public class PositionService implements IPositionService<Position> {
 	}
 
 	@Override
-	public List getByCompanyId(int companyId, int start, int offset) {
-		return positionDao.getByCompanyId(companyId, start, offset);
+	public List getByCompanyId(int companyId) {
+		return positionDao.getByCompanyId(companyId);
 	}
 
 }

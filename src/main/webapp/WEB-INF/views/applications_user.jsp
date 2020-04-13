@@ -3,8 +3,8 @@
 	<h4 style="margin-bottom: 30px">Manage Position Applications</h4>
 
 	<div class="resultList">
-		<table class="table table-striped" style="font-size: 12px">
-			<thead>
+		<table class="table" style="font-size: 12px">
+			<thead class="thead-light">
 				<tr>
 					<th><b>Position</b></th>
 					<th><b>Company</b></th>
@@ -13,7 +13,7 @@
 					<th><b>Status</b></th>
 					<th><b>Action</b></th>
 				</tr>
-			</thead class="thead-light">
+			</thead >
 			<tbody>
 				<c:forEach items="${requestScope.applications}" var="application">
 					<tr>
@@ -36,7 +36,7 @@
 						</c:choose>
 
 						<td scope="col" align="left"><a style="font-size: 12px"
-							class="btn btn-info mini blue-stripe" role="button"
+							class="btn btn-sm btn-outline-info" role="button"
 							href="${pageContext.request.contextPath}/application/${application.applicationId}">View</a>
 						</td>
 					</tr>

@@ -83,4 +83,12 @@ public class CompanyController {
 
 		return new ModelAndView("redirect:/company/list");
 	}
+	@RequestMapping(value = "/index/{companyId}", method = RequestMethod.GET)
+	public ModelAndView getPositions(@PathVariable("companyId") int companyId) {
+		Company company =  companyService.getById(companyId);
+		List positions = company.getPositions();
+		ModelAndView model = new ModelAndView("positions_company");
+		model.addObject("positions", positions);
+		return model;
+	}
 }

@@ -21,6 +21,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xdong.model.Application;
+import com.xdong.model.UserAccount;
 import com.xdong.service.IGenericService;
 import com.xdong.validator.ApplicationValidator;
 import com.xdong.service.IApplicationService;
@@ -88,7 +89,10 @@ public class ApplicationController {
 	@RequestMapping(value = "/apply/{positionId}", method = RequestMethod.GET)
 	public ModelAndView showForm(HttpServletRequest request, @PathVariable("positionId") int positionId) {
 		if(request.getSession(false) == null || request.getSession(false).getAttribute("userId") == null) {
-			return new ModelAndView("login");
+			ModelAndView mav = new ModelAndView("login");
+			UserAccount userAccount = new UserAccount();
+			mav.addObject("userAccount", userAccount);
+			return mav;
 		}
 		ModelAndView mav = new ModelAndView("apply");
 		Application application = new Application();

@@ -11,5 +11,5 @@ public interface IPositionService<T> {
 	public abstract void delete(T entity);
 	public abstract int getCount();
 	public abstract List getAllLimit(int start, int offset);
-	public abstract List getByCompanyId(int companyId, int start, int offset);
+	public abstract List getByCompanyId(int companyId);
 }

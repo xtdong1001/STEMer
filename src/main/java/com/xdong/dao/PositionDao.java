@@ -78,12 +78,10 @@ public class PositionDao implements IPositionDao<Position>{
 	}
 
 	@Override
-	public List getByCompanyId(int companyId, int start, int offset) {
+	public List getByCompanyId(int companyId) {
 		return getSession()
 				.createCriteria(Position.class)
 				.add(Restrictions.eq("companyId", companyId))
-				.setMaxResults(offset)
-				.setFirstResult(start)
 				.addOrder(Order.desc("publishTime"))
 				.list();
 	}

@@ -23,7 +23,7 @@ public class CompanyAccount extends UserAccount {
 		this.setPassword(userAccount.getPassword());
 		this.setAccountType(userAccount.getAccountType());
 		this.setEmail(userAccount.getEmail());
-		this.company = new Company();
+		this.company = new Company("/resources/images/company_logo2.png");
 	}
 
 	public Company getCompany() {

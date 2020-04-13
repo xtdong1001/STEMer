@@ -167,7 +167,4 @@ public class Position implements java.io.Serializable {
 	public void setIsAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
-
-
-	
 }

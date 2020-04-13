@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xdong.model.Company;
 import com.xdong.model.Position;
 import com.xdong.service.IGenericService;
 import com.xdong.service.IPositionService;
@@ -43,17 +44,19 @@ public class PositionController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/list/company/{companyId}/{page}", method = RequestMethod.GET)
-	public ModelAndView listByCompanyLimit(@PathVariable("companyId") int companyId, @PathVariable("page") int page) {
-		List positions = positionService.getByCompanyId(companyId, (page-1)*MAXPOSITION_USER, MAXPOSITION_USER);
-		int maxpages = (int)Math.ceil((double)positionService.getCount()/MAXPOSITION_USER);
-		
-		ModelAndView model = new ModelAndView("positions_user");
-		model.addObject("positions", positions);
-		model.addObject("pages", maxpages);
-		model.addObject("currentPage", page);
-		return model;
-	}
+	/*
+	 * @RequestMapping(value = "/list/company/{companyId}/{page}", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * listByCompanyLimit(@PathVariable("companyId") int
+	 * companyId, @PathVariable("page") int page) { List positions =
+	 * positionService.getByCompanyId(companyId, (page-1)*MAXPOSITION_USER,
+	 * MAXPOSITION_USER); int maxpages =
+	 * (int)Math.ceil((double)positionService.getCount()/MAXPOSITION_USER);
+	 * 
+	 * ModelAndView model = new ModelAndView("positions_user");
+	 * model.addObject("positions", positions); model.addObject("pages", maxpages);
+	 * model.addObject("currentPage", page); return model; }
+	 */
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView get(@PathVariable("id") int id) {
@@ -95,4 +98,5 @@ public class PositionController {
 
 		return new ModelAndView("redirect:/position/list");
 	}
+
 }

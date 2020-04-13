@@ -115,7 +115,13 @@ footer {
 	margin-left: 15%;
 	margin-right: 15%;
 	padding-bottom: 100px;
+}
 
+.company_contentWrapper {
+	margin-top: 50px;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding-bottom: 100px;
 }
 
 thead th{

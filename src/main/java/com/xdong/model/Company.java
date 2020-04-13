@@ -69,19 +69,7 @@ public class Company implements java.io.Serializable {
 	public Company() {
 	}
 
-	public Company(String name, String address, String city, String state, String zipcode,
-			String country, String foundYear, String industry, String description, String websiteAddr,
-			String logoPath) {
-		this.name = name;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zipcode = zipcode;
-		this.country = country;
-		this.foundYear = foundYear;
-		this.industry = industry;
-		this.description = description;
-		this.websiteAddr = websiteAddr;
+	public Company(String logoPath) {
 		this.logoPath = logoPath;
 	}
 

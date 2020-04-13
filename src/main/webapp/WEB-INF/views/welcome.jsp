@@ -18,7 +18,7 @@
 		<div style="margin: 0 auto; width: 100%; text-align: center;">
 			<c:choose>
 				<c:when test="${sessionScope.accountType=='Company' }">
-					<a href="${pageContext.request.contextPath}/index">Home</a>
+					<a href="${pageContext.request.contextPath}/company/index/${requestScope.companyId}">Home</a>
 				</c:when>
 				<c:otherwise>
 					<a href="${pageContext.request.contextPath}/index">Home</a>
