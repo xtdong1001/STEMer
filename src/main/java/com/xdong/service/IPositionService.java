@@ -2,6 +2,8 @@ package com.xdong.service;
 
 import java.util.List;
 
+import org.springframework.validation.Errors;
+
 public interface IPositionService<T> {
 	public abstract List getAll();
 	public abstract T getById(int id);
@@ -12,4 +14,5 @@ public interface IPositionService<T> {
 	public abstract int getCount();
 	public abstract List getAllLimit(int start, int offset);
 	public abstract List getByCompanyId(int companyId);
+	public void validate(Object target, Errors errors);
 }

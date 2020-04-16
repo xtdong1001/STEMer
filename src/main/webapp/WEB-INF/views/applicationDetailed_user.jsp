@@ -95,7 +95,7 @@
 			style="margin-left: 15%; max-width: 70%; margin-top: 30px;">
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item" style="background-color: #ededed">
-					Sorry For Rejection</li>
+					Rejection</li>
 				<li class="list-group-item">
 					<p>
 						<b>Comments:</b>

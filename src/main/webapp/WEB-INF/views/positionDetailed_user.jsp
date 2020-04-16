@@ -1,6 +1,6 @@
 <%@ include file="includes/header.jsp"%>
 <!--basic info-->
-<img src="${pageContext.request.contextPath}/resources/images/bg_company.jpg" style="height: 100%; width: 100%">
+<img src="${pageContext.request.contextPath}/resources/images/bg_user.jpg" style="height: 100%; width: 100%">
 <div class="card rounded-0"
 	style="margin-left: 15%; max-width: 70%; margin-top: 30px;">
 	<div class="card-body" style="background-color: #EFF4F9;">
@@ -49,7 +49,6 @@
 			<p>Closed</p>
 			</c:otherwise>
 			</c:choose>
-			<p>${requestScope.position.responsibility}</p>
 		</li>
 		<li style="min-height: 60px" align="center"><a type="button"
 			class="btn btn-primary"

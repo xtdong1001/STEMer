@@ -6,19 +6,24 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import com.xdong.dao.CompanyDao;
 import com.xdong.model.Company;
+import com.xdong.validator.CompanyValidator;
+import com.xdong.validator.PositionValidator;
 
 @Service
 @Transactional
 public class CompanyService implements IGenericService<Company> {
 
 	CompanyDao companyDao;
+	CompanyValidator companyValidator;
 
 	@Autowired
-	public void setCustomerDao(CompanyDao companyDao) {
+	public void setCustomerDao(CompanyDao companyDao, CompanyValidator companyValidator) {
 		this.companyDao = companyDao;
+		this.companyValidator = companyValidator;
 	}
 
 	@Override
@@ -59,6 +64,11 @@ public class CompanyService implements IGenericService<Company> {
 	@Override
 	public List getAllLimit(int start, int offset) {
 		return companyDao.getAllLimit(start, offset);
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		companyValidator.validate(target, errors);
 	}
 
 }

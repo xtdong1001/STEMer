@@ -56,10 +56,11 @@ public class CompanyAccountController {
 			ModelAndView mav =  new ModelAndView("welcome");
 			CompanyAccount companyAccount = companyAccountService.getById(uId);
 			Integer companyId = companyAccount.getCompany().getCompanyId();
-			mav.addObject("companyId", companyId);
+			
 			HttpSession session = request.getSession(true);
 			session.setAttribute("userId", uId);
 			session.setAttribute("accountType", userAccount.getAccountType());
+			session.setAttribute("companyId", companyId);
 
 			return mav;
 		}
@@ -80,14 +81,15 @@ public class CompanyAccountController {
 		companyAccountService.add(new CompanyAccount(userAccount));
 		
 		int uId = userAccountService.checkEmailExist(userAccount.getEmail());
+		CompanyAccount companyAccount = companyAccountService.getById(uId);
+		Integer companyId = companyAccount.getCompany().getCompanyId();
+		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("userId", uId);
 		session.setAttribute("accountType", userAccount.getAccountType());
+		session.setAttribute("companyId", companyId);
 		
 		ModelAndView mav = new ModelAndView("welcome");
-		CompanyAccount companyAccount = companyAccountService.getById(uId);
-		Integer companyId = companyAccount.getCompany().getCompanyId();
-		mav.addObject("companyId", companyId);
 		return mav;
 	}
 }

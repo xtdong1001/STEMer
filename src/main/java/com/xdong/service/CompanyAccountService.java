@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import com.xdong.dao.CompanyAccountDao;
 import com.xdong.model.CompanyAccount;
@@ -61,6 +62,12 @@ public class CompanyAccountService implements IGenericService<CompanyAccount> {
 	public List getAllLimit(int start, int offset) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

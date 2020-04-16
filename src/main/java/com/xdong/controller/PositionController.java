@@ -1,9 +1,13 @@
 package com.xdong.controller;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,37 +70,51 @@ public class PositionController {
 
 		return mav;
 	}
-
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public ModelAndView update(@PathVariable("id") int id) {
-		ModelAndView mav = new ModelAndView("position_detailed");
+	
+	@RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
+	public ModelAndView getCompanySide(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("positionDetailed_company");
 		Position position = positionService.getById(id);
-		mav.addObject("positionForm", position);
+		mav.addObject("position", position);
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable("id") int id) {
-		positionService.deleteById(id);
-
-		return new ModelAndView("redirect:/position/list");
-	}
-
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView add() {
-		ModelAndView mav = new ModelAndView("position/form");
+		ModelAndView mav = new ModelAndView("positionEdit");
 		Position position = new Position();
-		mav.addObject("positionForm", position);
+		mav.addObject("position", position);
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public ModelAndView update(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("positionEdit");
+		Position position = positionService.getById(id);
+		mav.addObject("position", position);
 
 		return mav;
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("positionForm") Position position) {
+	public ModelAndView save(@ModelAttribute("position") Position position, BindingResult result, HttpServletRequest request) {
+		positionService.validate(position, result);
+		
+		if(result.hasErrors()) {
+			ModelAndView mav = new ModelAndView("positionEdit");
+			mav.addObject("position", position);
+			return mav;
+		}
+			 
+		position.setPublishTime(new Date());
+		Company company = new Company();
+		company.setCompanyId((Integer)request.getSession(false).getAttribute("companyId"));
+		position.setCompany(company);
 		positionService.saveOrUpdate(position);
 
-		return new ModelAndView("redirect:/position/list");
+		return new ModelAndView("redirect:/company/index");
 	}
 
 }

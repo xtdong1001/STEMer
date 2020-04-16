@@ -6,18 +6,23 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 import com.xdong.dao.PositionDao;
 import com.xdong.model.Position;
+import com.xdong.validator.ApplicationValidator;
+import com.xdong.validator.PositionValidator;
 
 @Service
 @Transactional
 public class PositionService implements IPositionService<Position> {
 	PositionDao positionDao;
+	PositionValidator positionValidator;
 
 	@Autowired
-	public void setCustomerDao(PositionDao positionDao) {
+	public void setCustomerDao(PositionDao positionDao, PositionValidator positionValidator) {
 		this.positionDao = positionDao;
+		this.positionValidator = positionValidator;
 	}
 
 	@Override
@@ -62,6 +67,11 @@ public class PositionService implements IPositionService<Position> {
 	@Override
 	public List getByCompanyId(int companyId) {
 		return positionDao.getByCompanyId(companyId);
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		positionValidator.validate(target, errors);
 	}
 
 }

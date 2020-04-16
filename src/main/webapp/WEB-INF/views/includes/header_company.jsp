@@ -14,14 +14,11 @@
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<ul class="navbar-nav">
 			<li class="nav-item dropdown">
-				<a class="nav-link" href="list_positions_companyside.php" style="color: white;">Home</a>
+				<a class="nav-link" href="${pageContext.request.contextPath}/company/index" style="color: white;">Home</a>
 			</li> 
 			<li class="nav-item">
-				<a class="nav-link" href="Addposition_page.php" style="color: white;">Publish a Job</a>
+				<a class="nav-link" href="${pageContext.request.contextPath}/position/add" style="color: white;">Publish a Job</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="list_application_companyside.php" style="color: white;">Applications</a>
-			</li>   
 		</ul>
 	              
 	</div>  
@@ -30,7 +27,7 @@
 		<img src="${pageContext.request.contextPath}/resources/images/logo_STEMer.png" class="float-left" style="width:60px;" alt="avatar">
 	</a>
 		<div class="dropdown-menu dropdown-menu-right ">
-			<a class="dropdown-item" href="view_company_companyside.php">My Company</a>
+			<a class="dropdown-item" href="${pageContext.request.contextPath}/company/mine">My Company</a>
 			<a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Log Out</a>
 		</div>
 	</div>

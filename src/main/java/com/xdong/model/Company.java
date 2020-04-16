@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 // Generated 2020-3-28 16:14:24 by Hibernate Tools 5.4.12.Final
 
@@ -59,12 +62,15 @@ public class Company implements java.io.Serializable {
 	@Column(name="logoPath")
 	private String logoPath;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="company")
+	@OneToMany(mappedBy="company")
 	@OrderBy("publishTime DESC")
 	private List<Position> positions;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy="company")
 	private CompanyAccount companyAccount;
+	
+	@Transient
+	private CommonsMultipartFile logo;
 
 	public Company() {
 	}
@@ -175,6 +181,22 @@ public class Company implements java.io.Serializable {
 
 	public void setPositions(List<Position> positions) {
 		this.positions = positions;
+	}
+
+	public CompanyAccount getCompanyAccount() {
+		return companyAccount;
+	}
+
+	public void setCompanyAccount(CompanyAccount companyAccount) {
+		this.companyAccount = companyAccount;
+	}
+
+	public CommonsMultipartFile getLogo() {
+		return logo;
+	}
+
+	public void setLogo(CommonsMultipartFile logo) {
+		this.logo = logo;
 	}
 	
 }

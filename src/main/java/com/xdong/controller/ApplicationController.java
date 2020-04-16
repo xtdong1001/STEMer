@@ -2,6 +2,8 @@ package com.xdong.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -57,15 +59,71 @@ public class ApplicationController {
 	}
 
 	
-	@RequestMapping(value = "application/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/application/{id}", method = RequestMethod.GET)
 	public ModelAndView get(@PathVariable("id") int id, HttpServletRequest request) {
 		
 		Application application = applicationService.getById(id);
-		if(request.getSession(false) == null || request.getSession(false).getAttribute("userId") == null)
-			return new ModelAndView("login");
+		if(request.getSession(false) == null || request.getSession(false).getAttribute("userId") == null) {
+			ModelAndView mav = new ModelAndView("login");
+			mav.addObject("userAccount", new UserAccount());
+			return mav;
+		}
+			
 //		else if(request.getSession(false).getAttribute("userId") != application.getUserAccount().getUserId())
 //			return new ModelAndView("error");
 		ModelAndView mav = new ModelAndView("applicationDetailed_user");
+		mav.addObject("application", application);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/company/application/{id}", method = RequestMethod.GET)
+	public ModelAndView getCompanySide(@PathVariable("id") int id, HttpServletRequest request) {
+		
+		Application application = applicationService.getById(id);
+		if(request.getSession(false) == null || request.getSession(false).getAttribute("userId") == null) {
+			ModelAndView mav = new ModelAndView("login");
+			mav.addObject("userAccount", new UserAccount());
+			return mav;
+		}
+//		else if(request.getSession(false).getAttribute("userId") != application.getUserAccount().getUserId())
+//			return new ModelAndView("error");
+		ModelAndView mav = new ModelAndView("applicationDetailed_company");
+		mav.addObject("application", application);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/company/schedule/{id}", method = RequestMethod.POST)
+	public ModelAndView schedule(@PathVariable("id") int id, HttpServletRequest request) {
+		Application application = applicationService.getById(id);
+		application.setStatus("Decided");
+		application.setResult("Interview Scheduled");
+		application.setInterviewLocation(request.getParameter("interviewLocation"));
+		application.setComments(request.getParameter("comments"));
+		SimpleDateFormat fmt = new SimpleDateFormat("mm/dd/yyyy");
+		try {
+			application.setInterviewTime(fmt.parse(request.getParameter("interviewTime")));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		applicationService.saveOrUpdate(application);
+//		else if(request.getSession(false).getAttribute("userId") != application.getUserAccount().getUserId())
+//			return new ModelAndView("error");
+		ModelAndView mav = new ModelAndView("applicationDetailed_company");
+		mav.addObject("application", application);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/company/reject/{id}", method = RequestMethod.GET)
+	public ModelAndView reject(@PathVariable("id") int id, HttpServletRequest request) {
+		Application application = applicationService.getById(id);
+		application.setStatus("Decided");
+		application.setResult("Rejected");
+		application.setComments(request.getParameter("comments"));
+		applicationService.saveOrUpdate(application);
+//		else if(request.getSession(false).getAttribute("userId") != application.getUserAccount().getUserId())
+//			return new ModelAndView("error");
+		ModelAndView mav = new ModelAndView("applicationDetailed_company");
 		mav.addObject("application", application);
 		return mav;
 	}
@@ -77,13 +135,6 @@ public class ApplicationController {
 		mav.addObject("applicationForm", application);
 
 		return mav;
-	}
-
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable("id") int id) {
-		applicationService.deleteById(id);
-
-		return new ModelAndView("redirect:/application/list");
 	}
 
 	@RequestMapping(value = "/apply/{positionId}", method = RequestMethod.GET)

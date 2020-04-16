@@ -39,10 +39,10 @@ public class Position implements java.io.Serializable {
 	private String responsibility;
 	
 	@Column(name="salaryLow")
-	private Integer salaryLow;
+	private String salaryLow;
 	
 	@Column(name="salaryHigh")
-	private Integer salaryHigh;
+	private String salaryHigh;
 	
 	@Column(name="publishTime")
 	private Date publishTime;
@@ -54,7 +54,7 @@ public class Position implements java.io.Serializable {
 	private Company company;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="position")
-	@OrderBy("applicationTime")
+	@OrderBy("applyTime")
 	private List<Application> applications;
 	
 	public Position() {
@@ -70,7 +70,7 @@ public class Position implements java.io.Serializable {
 	}
 
 	public Position(String title, String jobDescription, String employmentType, String responsibility,
-			Integer salaryLow, Integer salaryHigh, Date publishTime) {
+			String salaryLow, String salaryHigh, Date publishTime) {
 		this.title = title;
 		this.jobDescription = jobDescription;
 		this.employmentType = employmentType;
@@ -120,19 +120,19 @@ public class Position implements java.io.Serializable {
 		this.responsibility = responsibility;
 	}
 
-	public Integer getSalaryLow() {
+	public String getSalaryLow() {
 		return this.salaryLow;
 	}
 
-	public void setSalaryLow(Integer salaryLow) {
+	public void setSalaryLow(String salaryLow) {
 		this.salaryLow = salaryLow;
 	}
 
-	public Integer getSalaryHigh() {
+	public String getSalaryHigh() {
 		return this.salaryHigh;
 	}
 
-	public void setSalaryHigh(Integer salaryHigh) {
+	public void setSalaryHigh(String salaryHigh) {
 		this.salaryHigh = salaryHigh;
 	}
 

@@ -1,7 +1,7 @@
 <%@ include file="includes/header.jsp"%>
 <div class = "company_contentWrapper">
     <div style="margin-bottom: 30px; padding-left:50px;">
-    <a type="button" class="btn btn-outline-info" href="Addposition_page.php" style="float:right; margin-right:50px;">New Position</a>
+    <a type="button" class="btn btn-outline-info" href="${pageContext.request.contextPath}/position/add" style="float:right; margin-right:50px;">New Position</a>
         <h4>Manage Published Positions</h4>
     </div>
 
@@ -30,14 +30,14 @@
 					<td scope="col" class="align-middle" align="left"><span
 						class="badge badge-success">Open</span></td>
 				</c:when>
-				<c:when test="${application.status == false }">
+				<c:when test="${position.isAvailable == false }">
 					<td scope="col" class="align-middle" align="left"><span
 						class="badge badge-warning">Closed</span></td>
 				</c:when>
 			</c:choose>
 		    <td scope="col" align="left">
-                <a style="font-size: 12px" class="btn btn-sm btn-outline-primary" role="button" href="view_position_companyside.php?positionID='. $row['positionID'] .'">View</a>
-                <a style="font-size: 12px" class="btn btn-sm btn-outline-success" role="button" href="#">Edit</a>
+                <a style="font-size: 12px" class="btn btn-sm btn-outline-primary" role="button" href="${pageContext.request.contextPath}/position/company/${position.positionId }">View</a>
+                <a style="font-size: 12px" class="btn btn-sm btn-outline-success" role="button" href="${pageContext.request.contextPath}/position/update/${position.positionId }">Edit</a>
             </td>
         </tr>
     </c:forEach>
@@ -47,7 +47,12 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('#positionsTable').DataTable();
+    var table = $('#positionsTable').DataTable({
+    	lengthChange: false,
+    	buttons: [ 'excel', 'pdf', 'csv' ]
+    });
+    table.buttons().container()
+    .appendTo( '#positionsTable_wrapper .col-md-6:eq(0)');
 } );
 </script>
 <%@ include file="includes/footer.jsp"%>
