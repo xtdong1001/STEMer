@@ -80,14 +80,13 @@ public class CompanyController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView add() {
-		ModelAndView mav = new ModelAndView("company/form");
-		Company company = new Company();
-		mav.addObject("companyForm", company);
-
-		return mav;
-	}
+	/*
+	 * @RequestMapping(value = "/add", method = RequestMethod.GET) public
+	 * ModelAndView add() { ModelAndView mav = new ModelAndView("company/form");
+	 * Company company = new Company(); mav.addObject("companyForm", company);
+	 * 
+	 * return mav; }
+	 */
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("company") Company company, BindingResult result, HttpServletRequest request) {
