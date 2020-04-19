@@ -1,9 +1,9 @@
 <%@ include file="includes/header.jsp"%>
 <div class="contentWrapper">
-	<h4 style="margin-bottom: 30px">Manage Position Applications</h4>
+	<h4 style="margin-bottom: 30px; margin-left:50px">Manage Position Applications</h4>
 
 	<div class="resultList">
-		<table class="table" style="font-size: 12px">
+		<table class="table" id="applicationsTable" style="font-size: 12px">
 			<thead class="thead-light">
 				<tr>
 					<th><b>Position</b></th>
@@ -45,5 +45,14 @@
 		</table>
 	</div>
 </div>
-
+<script>
+$(document).ready(function() {
+    var table = $('#applicationsTable').DataTable({
+    	lengthChange: false,
+    	buttons: [ 'excel', 'pdf', 'csv' ]
+    });
+    table.buttons().container()
+    .appendTo( '#applicationsTable_wrapper .col-md-6:eq(0)');
+} );
+</script>
 <%@ include file="includes/footer.jsp"%>

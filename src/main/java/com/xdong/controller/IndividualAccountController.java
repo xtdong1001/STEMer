@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xdong.model.Application;
+import com.xdong.model.CompanyAccount;
 import com.xdong.model.IndividualAccount;
 import com.xdong.model.UserAccount;
 import com.xdong.service.IGenericService;
@@ -53,9 +54,13 @@ public class IndividualAccountController {
 			return new ModelAndView("login", "errMsg", "Email, password or account type is incorrect.");
 		}
 		else {
+			IndividualAccount individualAccount = individualAccountService.getById(uId);
+			Integer profileId = individualAccount.getProfile().getProfileId();
+			
 			HttpSession session = request.getSession(true);
 			session.setAttribute("userId", uId);
 			session.setAttribute("accountType", userAccount.getAccountType());
+			session.setAttribute("profileId", profileId);
 			System.out.println(userAccount.getAccountType());
 			return new ModelAndView("welcome");
 		}
@@ -76,9 +81,14 @@ public class IndividualAccountController {
 		individualAccountService.add(new IndividualAccount(userAccount));
 		
 		int uId = userAccountService.checkEmailExist(userAccount.getEmail());
+		
+		IndividualAccount individualAccount = individualAccountService.getById(uId);
+		Integer profileId = individualAccount.getProfile().getProfileId();
+		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("userId", uId);
 		session.setAttribute("accountType", userAccount.getAccountType());
+		session.setAttribute("profileId", profileId);
 
 		return new ModelAndView("welcome");
 	}

@@ -4,12 +4,12 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-2">
-                <img src="${pageContext.request.contextPath}/${requestScope.company.logoPath }" style="height: 100px; height: 100px;">
+                <img src="/archive/${requestScope.company.logoPath }" style="height: 100px; height: 100px;">
             </div>
             <div class="col-sm-10">
-                ${requestScope.company.name }
-                <br>
-                ${requestScope.company.city } <span>, </span>${requestScope.company.state }<br>
+                <h3>${requestScope.company.name }</h3>
+                
+                ${requestScope.company.city }, ${requestScope.company.state }<br><br>
                 <a type="button" class="btn btn-primary" href="#jumpTo">See all open positions</a>
             </div>
         </div>
@@ -40,7 +40,7 @@
 			<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
 				<div class="card rounded-top">
 					<img class="card-img-top rounded-top company_logo"
-						src="${pageContext.request.contextPath}${position.company.logoPath }"
+						src="/archive/${position.company.logoPath }"
 						alt="Card image">
 					<div class="card-body">
 						<div class="title-height">

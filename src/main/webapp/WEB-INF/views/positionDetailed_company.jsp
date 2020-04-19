@@ -5,7 +5,7 @@
 	<div class="card-body" style="background-color: #EFF4F9;">
 		<div class="row">
 			<div class="col-sm-2">
-				<img src="${pageContext.request.contextPath}${requestScope.position.company.logoPath }"
+				<img src="/archive/${requestScope.position.company.logoPath }"
 					style="height: 100px; height: 100px;">
 			</div>
 			<div class="col-sm-10">
@@ -76,7 +76,7 @@
 				<tr>
 					<td scope="col" class="align-middle" align="left">${application.applicationId}</td>
 					<td scope="col" class="align-middle" align="left"><a
-						href="${pageContext.request.contextPath}/company/${application.applicationId}">${application.firstName } ${application.lastName }</a></td>
+						href="${pageContext.request.contextPath}/profile/company/${application.individualAccount.profile.profileId}">${application.firstName } ${application.lastName }</a></td>
 					<td scope="col" class="align-middle" align="left">${application.email } </td>
 					<td scope="col" class="align-middle" align="left">${application.phone } </td>
 					<td scope="col" class="align-middle" align="left">${application.applyTime }</td>

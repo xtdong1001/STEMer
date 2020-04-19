@@ -38,7 +38,7 @@ public class CompanyValidator implements Validator {
 		if(company.getLogo().getSize() != 0) {
 			String extension = FilenameUtils.getExtension(company.getLogo().getOriginalFilename());
 			if(!extension.matches(IMAGE_PATTERN))
-				errors.rejectValue("logo", "errorLogo", "Please upload a correct image.");
+				errors.rejectValue("logo", "errorLogo", "Please upload a valid image.");
 		}
 	}
 }

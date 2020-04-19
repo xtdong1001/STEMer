@@ -12,7 +12,7 @@
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
 		<ul class="navbar-nav">
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="index.php" id="navbardrop" data-toggle="dropdown" style="color: white;">
+				<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/index" id="navbardrop" data-toggle="dropdown" style="color: white;">
 					Home
 				</a>
 				<div class="dropdown-menu">
@@ -21,7 +21,10 @@
 				</div>
 			</li> 
 			<li class="nav-item">
-				<a class="nav-link" href="${pageContext.request.contextPath}/position/list/1" style="color: white;">Job</a>
+				<a class="nav-link" href="${pageContext.request.contextPath}/position/list/1" style="color: white;">Jobs</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="${pageContext.request.contextPath}/company/list/1" style="color: white;">Companies</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${pageContext.request.contextPath}/user/applications" style="color: white;">Applications</a>
@@ -31,10 +34,10 @@
 	</div>  
 	<div class="dropdown navbar-brand">
 		<a data-toggle="dropdown" href="#">
-		<img src="${pageContext.request.contextPath}/resources/images/portrait_user.png" class="rounded-circle float-right" style="width:50px;" alt="avatar">
+		<img id="userPortrait" src="/archive/portrait_user.png" class="rounded-circle float-right" style="width:50px;" alt="avatar">
 		</a>
 		<div class="dropdown-menu dropdown-menu-right ">
-			<a class="dropdown-item" href="view_user_profile_userside.php">Profile</a>
+			<a class="dropdown-item" href="${pageContext.request.contextPath}/profile/${sessionScope.profileId}">Profile</a>
 			<a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Log Out</a>
 		</div>
 	</div>
@@ -53,3 +56,13 @@
      </div>
 </div>
 </form>
+<script type="text/javascript">
+var url = "${pageContext.request.contextPath}"+"/profile/portrait";
+$(document).ready(
+	function() {
+		$.get(url, function(data){
+			$('#userPortrait').attr('src', '/archive/'+data);
+		})
+	});
+
+</script>

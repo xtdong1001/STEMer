@@ -4,7 +4,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-2">
-                <img src="${pageContext.request.contextPath}${requestScope.company.logoPath }" style="height: 100px; height: 100px;">
+                <img src="/archive/${requestScope.company.logoPath }" style="height: 100px; height: 100px;">
             </div>
             <div class="col-sm-10">
                 <h3>${requestScope.company.name }</h3>

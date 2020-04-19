@@ -135,9 +135,9 @@ tbody td{
 }
 
 .grey {
-	margin-left: 34%;
-	margin-right: 34%;
-	margin-top: 15%;
+	width: 400px;
+	margin: auto;
+	margin-top: 10%;
 	margin-bottom: 20%;
 }
 

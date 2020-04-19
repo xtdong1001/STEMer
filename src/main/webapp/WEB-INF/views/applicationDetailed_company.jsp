@@ -13,7 +13,7 @@
 					<b>Name</b>
 				</p>
 				<p>
-					<a href="">${requestScope.application.firstName }
+					<a href="${pageContext.request.contextPath}/profile/company/${requestScope.application.individualAccount.profile.profileId}">${requestScope.application.firstName }
 						${requestScope.application.lastName }</a>
 				</p>
 				<p>
@@ -43,7 +43,9 @@
 			<li class="list-group-item">
 				<p>
 					<b>Resume</b>
-				</p> <a class="btn btn-sm btn-outline-success"
+				</p> 
+				${requestScope.application.resumePath }
+				<a class="btn btn-sm btn-outline-success"
 				href="/archive/${requestScope.application.resumePath }">Download</a>
 				<p style="margin-top: 20px">
 					<b>Date Available</b>

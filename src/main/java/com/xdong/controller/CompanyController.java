@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -126,5 +127,13 @@ public class CompanyController {
 		ModelAndView model = new ModelAndView("positions_company");
 		model.addObject("positions", positions);
 		return model;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/logo", method = RequestMethod.GET)
+	public String getLogo(HttpServletRequest request) {
+		int companyId = (int) request.getSession(false).getAttribute("companyId");
+		Company company =  companyService.getById(companyId);
+		return company.getLogoPath();
 	}
 }

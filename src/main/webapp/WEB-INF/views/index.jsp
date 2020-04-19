@@ -6,7 +6,7 @@
     	<c:forEach items="${requestScope.positions}" var="position">
     	<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
                 <div class="card rounded-top">
-                    <img class="card-img-top rounded-top company_logo" src="${pageContext.request.contextPath}${position.company.logoPath }" alt="Card image">
+                    <img class="card-img-top rounded-top company_logo" src="/archive/${position.company.logoPath }" alt="Card image">
                     <div class="card-body">
                         <div class="title-height">
                             <h6 class="card-title" style="line-height: 15px">${position.title }</h6>
@@ -39,7 +39,7 @@
     	<c:forEach items="${requestScope.companies}" var="company">
     		<div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4 ">
 			<div class="card" style="padding-top: 10px">
-				 <img class="company_logo2" src="${pageContext.request.contextPath}${company.logoPath }" alt="Card image">
+				 <img class="company_logo2" src="/archive/${company.logoPath }" alt="Card image">
 				 <div class="company-title">
 					<h5>${company.name }</h5>
 					<p class="industry">${company.industry }</p> 

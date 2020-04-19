@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xdong.business.EmailSend;
 import com.xdong.model.Application;
 import com.xdong.model.UserAccount;
 import com.xdong.service.IGenericService;
@@ -30,6 +32,8 @@ import com.xdong.service.IApplicationService;
 
 @Controller
 public class ApplicationController {
+	
+	private static final Logger logger = Logger.getLogger(ApplicationController.class);
 
 	@Autowired
 	IApplicationService<Application> applicationService;
@@ -59,9 +63,9 @@ public class ApplicationController {
 	@RequestMapping(value = "/application/{id}", method = RequestMethod.GET)
 	public ModelAndView get(@PathVariable("id") int id, HttpServletRequest request) {
 		Application application = applicationService.getById(id);
-
-		if(request.getSession(false).getAttribute("userId") != application.getUserAccount().getUserId())
-			return new ModelAndView("redirect:/error");
+//
+//		if(request.getSession(false).getAttribute("userId") != application.getUserAccount().getUserId())
+//			return new ModelAndView("redirect:/error");
 		
 		ModelAndView mav = new ModelAndView("applicationDetailed_user");
 		mav.addObject("application", application);
@@ -118,7 +122,7 @@ public class ApplicationController {
 		
 		applicationService.saveOrUpdate(application);
 
-		return new ModelAndView("apply_success");
+		return new ModelAndView("redirect:/user/applications");
 	}
 	
 	@RequestMapping(value = "/company/application/{id}", method = RequestMethod.GET)
@@ -153,6 +157,9 @@ public class ApplicationController {
 		}
 		applicationService.saveOrUpdate(application);
 
+		EmailSend.send("mailNotify@STEMer.com", application.getEmail(), "Notification from: STEMer - Your application status has been updated!", "Notification from: STEMer\nYour application status has been updated!");
+		
+		
 		ModelAndView mav = new ModelAndView("applicationDetailed_company");
 		mav.addObject("application", application);
 		return mav;
@@ -165,6 +172,9 @@ public class ApplicationController {
 		application.setResult("Rejected");
 		application.setComments(request.getParameter("comments"));
 		applicationService.saveOrUpdate(application);
+		
+		EmailSend.send("mailNotify@STEMer.com", application.getEmail(), "Notification from: STEMer - Your application status has been updated!", "Notification from: STEMer\nYour application status has been updated!");
+		
 		ModelAndView mav = new ModelAndView("applicationDetailed_company");
 		mav.addObject("application", application);
 		return mav;

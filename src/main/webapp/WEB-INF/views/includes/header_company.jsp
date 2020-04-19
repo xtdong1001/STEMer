@@ -24,7 +24,7 @@
 	</div>  
 	<div class="dropdown navbar-brand">
 		<a data-toggle="dropdown" href="#">
-		<img src="${pageContext.request.contextPath}/resources/images/logo_STEMer.png" class="float-left" style="width:60px;" alt="avatar">
+		<img id="companyLogo"  src="/archive/logo_STEMer.png" class="rounded-circle float-left" style="width:50px;" alt="avatar">
 	</a>
 		<div class="dropdown-menu dropdown-menu-right ">
 			<a class="dropdown-item" href="${pageContext.request.contextPath}/company/mine">My Company</a>
@@ -44,3 +44,14 @@
      </div>
 </div>
 </form>
+
+<script type="text/javascript">
+var url = "${pageContext.request.contextPath}"+"/company/logo";
+$(document).ready(
+	function() {
+		$.get(url, function(data){
+			$('#companyLogo').attr('src', '/archive/'+data);
+		})
+	});
+
+</script>

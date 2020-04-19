@@ -186,11 +186,11 @@ public class Application implements java.io.Serializable {
 		this.applyTime = applyTime;
 	}
 
-	public IndividualAccount getUserAccount() {
+	public IndividualAccount getIndividualAccount() {
 		return individualAccount;
 	}
 
-	public void setUserAccount(IndividualAccount individualAccount) {
+	public void setIndividualAccount(IndividualAccount individualAccount) {
 		this.individualAccount = individualAccount;
 	}
 

@@ -6,7 +6,7 @@
 			<div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4 ">
 				<div class="card" style="padding-top: 10px">
 					<img class="company_logo2"
-						src="${pageContext.request.contextPath}${company.logoPath }"
+						src="/archive/${company.logoPath }"
 						alt="Card image">
 					<div class="company-title">
 						<h5>${company.name }</h5>

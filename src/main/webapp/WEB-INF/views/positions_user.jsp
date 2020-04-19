@@ -6,7 +6,7 @@
 			<div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
 				<div class="card rounded-top">
 					<img class="card-img-top rounded-top company_logo"
-						src="${pageContext.request.contextPath}${position.company.logoPath }"
+						src="/archive/${position.company.logoPath }"
 						alt="Card image">
 					<div class="card-body">
 						<div class="title-height">

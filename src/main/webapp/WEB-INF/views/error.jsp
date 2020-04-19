@@ -15,6 +15,7 @@
 		<Strong>Error</Strong>
 	</h1>
 	<%-- <p>user id: ${sessionScope.userId }</p> --%>
+	<p >${requetScope.errMsg }</p>
 	<p></p>
 	<div style="margin: 0 auto; width: 100%; text-align: center;">
 			<c:choose>

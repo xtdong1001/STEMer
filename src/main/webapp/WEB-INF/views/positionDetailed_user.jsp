@@ -6,7 +6,7 @@
 	<div class="card-body" style="background-color: #EFF4F9;">
 		<div class="row">
 			<div class="col-sm-2">
-				<img src="${pageContext.request.contextPath}${requestScope.position.company.logoPath }"
+				<img src="/archive/${requestScope.position.company.logoPath }"
 					style="height: 100px; height: 100px;">
 			</div>
 			<div class="col-sm-10">
