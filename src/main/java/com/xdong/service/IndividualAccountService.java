@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
@@ -16,6 +17,9 @@ import com.xdong.model.IndividualAccount;
 public class IndividualAccountService implements IGenericService<IndividualAccount> {
 
 	IndividualAccountDao individualAccountDao;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	public void setIndividualAccountDao(IndividualAccountDao individualAccountDao) {
@@ -34,6 +38,7 @@ public class IndividualAccountService implements IGenericService<IndividualAccou
 
 	@Override
 	public void saveOrUpdate(IndividualAccount individualAccount) {
+		individualAccount.setPassword(passwordEncoder.encode(individualAccount.getPassword()));
 		individualAccountDao.saveOrUpdate(individualAccount);
 	}
 
@@ -44,6 +49,7 @@ public class IndividualAccountService implements IGenericService<IndividualAccou
 
 	@Override
 	public void add(IndividualAccount individualAccount) {
+		individualAccount.setPassword(passwordEncoder.encode(individualAccount.getPassword()));
 		individualAccountDao.add(individualAccount);
 	}
 

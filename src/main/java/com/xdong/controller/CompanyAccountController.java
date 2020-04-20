@@ -48,12 +48,12 @@ public class CompanyAccountController {
 			return mav;
 		}
 
-		Integer uId = (Integer)userAccountService.check(userAccount);
-		if(uId == -1) {
+		if(!userAccountService.check(userAccount)) {
 			return new ModelAndView("login", "errMsg", "Email, password or account type is incorrect.");
 		}
 		else {
 			ModelAndView mav =  new ModelAndView("welcome");
+			int uId = userAccountService.getByEmail(userAccount.getEmail()).getUserId();
 			CompanyAccount companyAccount = companyAccountService.getById(uId);
 			Integer companyId = companyAccount.getCompany().getCompanyId();
 			
@@ -74,13 +74,13 @@ public class CompanyAccountController {
 		 * new UserAccount()); return mav; }
 		 */
 		
-		if(userAccountService.checkEmailExist(userAccount.getEmail()) != -1) {
+		if(userAccountService.getByEmail(userAccount.getEmail()) != null) {
 			return new ModelAndView("register", "errMsg", "Email is already used.");
 		}
 		
 		companyAccountService.add(new CompanyAccount(userAccount));
 		
-		int uId = userAccountService.checkEmailExist(userAccount.getEmail());
+		int uId = userAccountService.getByEmail(userAccount.getEmail()).getUserId();
 		CompanyAccount companyAccount = companyAccountService.getById(uId);
 		Integer companyId = companyAccount.getCompany().getCompanyId();
 		

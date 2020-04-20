@@ -58,28 +58,11 @@ public class UserAccountDao implements IUserAccountDao<UserAccount>{
 	}
 
 	@Override
-	public int check(UserAccount userAccount) {
-		Integer result = (Integer) getSession()
+	public UserAccount getByEmail(String email) {
+		UserAccount result = (UserAccount) getSession()
 				.createCriteria(UserAccount.class)
-				.setProjection(Projections.property("userId"))
-				.add(Example.create(userAccount))
-				.uniqueResult();
-		if(result != null)
-			return result;
-		else
-			return -1;
-	}
-
-	@Override
-	public int checkEmailExist(String email) {
-		Integer result = (Integer) getSession()
-				.createCriteria(UserAccount.class)
-				.setProjection(Projections.property("userId"))
 				.add(Restrictions.eq("email", email))
 				.uniqueResult();
-		if(result != null)
-			return result;
-		else
-			return -1;
+		return result;
 	}
 }

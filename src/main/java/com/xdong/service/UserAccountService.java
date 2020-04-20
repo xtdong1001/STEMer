@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 
@@ -18,6 +19,9 @@ public class UserAccountService implements IUserAccountService<UserAccount> {
 
 	UserAccountDao userAccountDao;
 	UserAccountValidator userAccountValidator;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	public void setCustomerDao(UserAccountDao userAccountDao, UserAccountValidator userAccountValidator) {
@@ -37,6 +41,7 @@ public class UserAccountService implements IUserAccountService<UserAccount> {
 
 	@Override
 	public void saveOrUpdate(UserAccount userAccount) {
+		userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
 		userAccountDao.saveOrUpdate(userAccount);
 	}
 
@@ -47,6 +52,7 @@ public class UserAccountService implements IUserAccountService<UserAccount> {
 
 	@Override
 	public void add(UserAccount userAccount) {
+		userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
 		userAccountDao.add(userAccount);
 	}
 
@@ -56,8 +62,9 @@ public class UserAccountService implements IUserAccountService<UserAccount> {
 	}
 
 	@Override
-	public int check(UserAccount userAccount) {
-		return userAccountDao.check(userAccount);
+	public boolean check(UserAccount userAccount) {
+		UserAccount savedAccount = userAccountDao.getByEmail(userAccount.getEmail());
+		return passwordEncoder.matches(userAccount.getPassword(), savedAccount.getPassword());
 	}
 
 	@Override
@@ -66,8 +73,8 @@ public class UserAccountService implements IUserAccountService<UserAccount> {
 	}
 
 	@Override
-	public int checkEmailExist(String email) {
-		return userAccountDao.checkEmailExist(email);
+	public UserAccount getByEmail(String email) {
+		return userAccountDao.getByEmail(email);
 	}
 
 }

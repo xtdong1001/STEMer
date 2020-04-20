@@ -49,11 +49,11 @@ public class IndividualAccountController {
 			return mav;
 		}
 
-		Integer uId = (Integer)userAccountService.check(userAccount);
-		if(uId == -1) {
+		if(!userAccountService.check(userAccount)) {
 			return new ModelAndView("login", "errMsg", "Email, password or account type is incorrect.");
 		}
 		else {
+			int uId = userAccountService.getByEmail(userAccount.getEmail()).getUserId();
 			IndividualAccount individualAccount = individualAccountService.getById(uId);
 			Integer profileId = individualAccount.getProfile().getProfileId();
 			
@@ -74,13 +74,13 @@ public class IndividualAccountController {
 		 * new UserAccount()); return mav; }
 		 */
 		
-		if(userAccountService.checkEmailExist(userAccount.getEmail()) != -1) {
+		if(userAccountService.getByEmail(userAccount.getEmail()) != null) {
 			return new ModelAndView("register", "errMsg", "Email is already used.");
 		}
 		
 		individualAccountService.add(new IndividualAccount(userAccount));
 		
-		int uId = userAccountService.checkEmailExist(userAccount.getEmail());
+		int uId = userAccountService.getByEmail(userAccount.getEmail()).getUserId();
 		
 		IndividualAccount individualAccount = individualAccountService.getById(uId);
 		Integer profileId = individualAccount.getProfile().getProfileId();

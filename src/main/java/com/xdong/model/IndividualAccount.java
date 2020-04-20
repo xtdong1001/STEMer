@@ -39,7 +39,7 @@ public class IndividualAccount extends UserAccount {
 		this.setPassword(userAccount.getPassword());
 		this.setAccountType(userAccount.getAccountType());
 		this.setEmail(userAccount.getEmail());
-		this.profile = new Profile("/resources/images/portrait_user.png");
+		this.profile = new Profile("portrait_user.png");
 	}
 	
 	public List<Application> getApplications() {

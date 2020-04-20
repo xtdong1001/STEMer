@@ -16,6 +16,5 @@ public interface IUserAccountDao<T extends Serializable>  {
 	public abstract void saveOrUpdate(T entity);
 	public abstract void deleteById(int id);
 	public abstract void delete(T entity);
-	public abstract int check(T entity);
-	public int checkEmailExist(String email);
+	public T getByEmail(String email);
 }

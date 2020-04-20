@@ -13,7 +13,7 @@ public interface IUserAccountService<T> {
 	public abstract void saveOrUpdate(T entity);
 	public abstract void deleteById(int id);
 	public abstract void delete(T entity);
-	public abstract int check(T entity);
-	public abstract int checkEmailExist(String email);
+	public abstract boolean check(T entity);
+	public abstract T getByEmail(String email);
 	public void validate(Object target, Errors errors);
 }
