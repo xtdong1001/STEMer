@@ -5,7 +5,7 @@
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-2">
-				<img src="/archive/${requestScope.profile.portraitPath }"
+				<img src="/archive/${requestScope.profile.portraitPath }" class="rounded-circle"
 					style="height: 100px; height: 100px;">
 			</div>
 			<div class="col-sm-10"><h3>${requestScope.profile.firstName } ${requestScope.profile.lastName }</h3> 

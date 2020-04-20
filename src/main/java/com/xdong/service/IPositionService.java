@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 
 public interface IPositionService<T> {
 	public abstract List getAll();
+	public abstract List search(String key);
 	public abstract T getById(int id);
 	public abstract void add(T entity);
 	public abstract void saveOrUpdate(T entity);

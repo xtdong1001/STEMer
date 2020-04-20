@@ -5,8 +5,8 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +84,14 @@ public class PositionDao implements IPositionDao<Position>{
 				.createCriteria(Position.class)
 				.add(Restrictions.eq("companyId", companyId))
 				.addOrder(Order.desc("publishTime"))
+				.list();
+	}
+
+	@Override
+	public List search(String key) {
+		return getSession()
+				.createCriteria(Position.class)
+				.add(Restrictions.or(Restrictions.ilike("title", key, MatchMode.ANYWHERE), Restrictions.ilike("jobDescription", key, MatchMode.ANYWHERE)))
 				.list();
 	}
 }

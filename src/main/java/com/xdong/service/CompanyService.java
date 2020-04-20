@@ -71,4 +71,9 @@ public class CompanyService implements IGenericService<Company> {
 		companyValidator.validate(target, errors);
 	}
 
+	@Override
+	public List search(String key) {
+		return companyDao.search(key);
+	}
+
 }

@@ -76,4 +76,10 @@ public class CompanyAccountService implements IGenericService<CompanyAccount> {
 		
 	}
 
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

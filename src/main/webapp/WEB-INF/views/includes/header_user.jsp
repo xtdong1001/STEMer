@@ -44,15 +44,13 @@
 	
 	     
 </nav>
-<form action="index.php" method="post">
+<form action="${pageContext.request.contextPath}/search" method="post">
 <div class="form-row" style="margin-top:86px;background-color:black;padding:10px;">
      <div class="input-group col-10 ml-5 mt-1 mb-1">
-        <input type="text" name="position" class="form-control" placeholder="Search Position" aria-label="Search term" aria-describedby="basic-addon">
+        <input type="text" name="key" class="form-control" aria-label="Search term" aria-describedby="basic-addon">
      </div>
-     
      <div>
 		<input type="submit" class="btn btn-dark col-xs-2 mt-1 mb-1 ml-5" value="Search"/>
-		<input type="hidden" name="submitted" value="TRUE" />
      </div>
 </div>
 </form>

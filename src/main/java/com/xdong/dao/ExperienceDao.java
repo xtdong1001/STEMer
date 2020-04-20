@@ -73,4 +73,10 @@ public class ExperienceDao implements IGenericDao<Experience>{
 				.setFirstResult(start)
 				.list();
 	}
+
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

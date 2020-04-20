@@ -71,4 +71,10 @@ public class EduBackgroundDao implements IGenericDao<EduBackground>{
 				.setFirstResult(start)
 				.list();
 	}
+
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

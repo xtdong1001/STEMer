@@ -5,9 +5,11 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -72,6 +74,14 @@ public class CompanyDao implements IGenericDao<Company>{
 				.createCriteria(Company.class)
 				.setMaxResults(offset)
 				.setFirstResult(start)
+				.list();
+	}
+
+	@Override
+	public List search(String key) {
+		return getSession()
+				.createCriteria(Company.class)
+				.add(Restrictions.or(Restrictions.ilike("name", key, MatchMode.ANYWHERE), Restrictions.ilike("description", key, MatchMode.ANYWHERE), Restrictions.ilike("industry", key, MatchMode.ANYWHERE)))
 				.list();
 	}
 }

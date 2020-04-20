@@ -66,4 +66,10 @@ public class IndividualAccountDao implements IGenericDao<IndividualAccount>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

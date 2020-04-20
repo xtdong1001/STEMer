@@ -5,7 +5,7 @@
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-2">
-				<img src="/archive/${requestScope.profile.portraitPath }"
+				<img src="/archive/${requestScope.profile.portraitPath }" class="rounded-circle"
 					style="height: 100px; height: 100px;">
 			</div>
 			<div class="col-sm-10"><h3>${requestScope.profile.firstName } ${requestScope.profile.lastName }</h3> 
@@ -43,7 +43,7 @@
 		<li class="list-group-item">
 			<div class="row">
 				<div class="col-sm-2">
-					<img src="${pageContext.request.contextPath}/resources/images/company_logo1.png"
+					<img src="${pageContext.request.contextPath}/resources/images/company_logo1.png" class="rounded-circle"
 						style="height: 100px; height: 100px;">
 				</div>
 				<div class="col-sm-7">
@@ -85,11 +85,7 @@
 					</p>
 					<p>${education.description }</p>
 				</div>
-				<fmt:formatDate value="${education.fromYear}"
-							var="fromDate" type="date" pattern="yyyy" />
-				<fmt:formatDate value="${education.toYear}"
-							var="toDate" type="date" pattern="yyyy" />
-				<div class="col-sm-2"> ${fromDate } - ${toDate }</div>
+				<div class="col-sm-2"> ${education.fromYear } - ${education.toYear }</div>
 			</div>
 		</li>
 	</ul>

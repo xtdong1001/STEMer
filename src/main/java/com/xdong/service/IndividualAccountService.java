@@ -76,4 +76,10 @@ public class IndividualAccountService implements IGenericService<IndividualAccou
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

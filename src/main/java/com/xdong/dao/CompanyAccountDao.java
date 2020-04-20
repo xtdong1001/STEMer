@@ -65,4 +65,10 @@ public class CompanyAccountDao implements IGenericDao<CompanyAccount>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

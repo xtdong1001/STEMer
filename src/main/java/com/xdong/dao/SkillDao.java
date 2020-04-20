@@ -73,4 +73,10 @@ public class SkillDao implements IGenericDao<Skill>{
 				.setFirstResult(start)
 				.list();
 	}
+
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

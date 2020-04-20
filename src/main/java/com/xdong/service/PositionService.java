@@ -74,4 +74,9 @@ public class PositionService implements IPositionService<Position> {
 		positionValidator.validate(target, errors);
 	}
 
+	@Override
+	public List search(String key) {
+		return positionDao.search(key);
+	}
+
 }

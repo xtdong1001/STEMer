@@ -70,4 +70,9 @@ public class ProfileService implements IGenericService<Profile> {
 		profileValidator.validate(target, errors);
 	}
 
+	@Override
+	public List search(String key) {
+		return profileDao.search(key);
+	}
+
 }

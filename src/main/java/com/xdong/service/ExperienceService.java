@@ -70,4 +70,10 @@ public class ExperienceService implements IGenericService<Experience> {
 		experienceValidator.validate(target, errors);
 	}
 
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

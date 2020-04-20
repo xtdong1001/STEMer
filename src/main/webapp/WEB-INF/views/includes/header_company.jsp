@@ -32,7 +32,7 @@
 		</div>
 	</div>
 </nav>
-<form action="list_positions_companyside.php" method="post">
+<!-- <form action="list_positions_companyside.php" method="post">
 <div class="form-row" style="margin-top:86px;background-color:black;padding:10px;">
      <div class="input-group col-10 ml-5 mt-1 mb-1">
         <input type="text" name="position" class="form-control" placeholder="Search Posted Position" aria-label="Search term" aria-describedby="basic-addon">
@@ -43,7 +43,7 @@
 		<input type="hidden" name="submitted" value="TRUE" />
      </div>
 </div>
-</form>
+</form> -->
 
 <script type="text/javascript">
 var url = "${pageContext.request.contextPath}"+"/company/logo";

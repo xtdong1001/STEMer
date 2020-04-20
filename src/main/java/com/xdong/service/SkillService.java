@@ -70,4 +70,10 @@ public class SkillService implements IGenericService<Skill> {
 		skillValidator.validate(target, errors);
 	}
 
+	@Override
+	public List search(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
