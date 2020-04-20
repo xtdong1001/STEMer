@@ -38,28 +38,8 @@ public class ApplicationController {
 	@Autowired
 	IApplicationService<Application> applicationService;
 	
-	private static final int MAXPOSITION_USER = 12;
 	public static final String archivePath = "D:/xtdong/grad/6250 Web dev tools/Archive";
 
-	/*
-	 * @RequestMapping(value = "/list", method = RequestMethod.GET) public
-	 * ModelAndView list() { ModelAndView model = new
-	 * ModelAndView("application/list"); List list = applicationService.getAll();
-	 * model.addObject("list", list);
-	 * 
-	 * return model; }
-	 * 
-	 * @RequestMapping(value = "/list/{page}", method = RequestMethod.GET) public
-	 * ModelAndView listLimit(@PathVariable("page") int page) { List applications =
-	 * applicationService.getAllLimit((page-1)*MAXPOSITION_USER, MAXPOSITION_USER);
-	 * int maxpages =
-	 * (int)Math.ceil((double)applicationService.getCount()/MAXPOSITION_USER);
-	 * 
-	 * ModelAndView model = new ModelAndView("applications_user");
-	 * model.addObject("applications", applications); model.addObject("pages",
-	 * maxpages); model.addObject("currentPage", page); return model; }
-	 */
-	
 	@RequestMapping(value = "/application/{id}", method = RequestMethod.GET)
 	public ModelAndView get(@PathVariable("id") int id, HttpServletRequest request) {
 		Application application = applicationService.getById(id);
@@ -71,17 +51,6 @@ public class ApplicationController {
 		mav.addObject("application", application);
 		return mav;
 	}
-	
-
-	/*
-	 * @RequestMapping(value = "/update/{id}", method = RequestMethod.GET) public
-	 * ModelAndView update(@PathVariable("id") int id) { ModelAndView mav = new
-	 * ModelAndView("application_detailed"); Application application =
-	 * applicationService.getById(id); mav.addObject("applicationForm",
-	 * application);
-	 * 
-	 * return mav; }
-	 */
 
 	@RequestMapping(value = "/apply/{positionId}", method = RequestMethod.GET)
 	public ModelAndView showForm(HttpServletRequest request, @PathVariable("positionId") int positionId) {
@@ -117,6 +86,7 @@ public class ApplicationController {
 		try {
 			resume.transferTo(file);
 		} catch (IllegalStateException | IOException e) {
+			logger.error(e.getStackTrace());
 			return new ModelAndView("error");
 		}
 		
@@ -152,13 +122,13 @@ public class ApplicationController {
 		try {
 			application.setInterviewTime(fmt.parse(request.getParameter("interviewTime")));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getStackTrace());
 		}
+		
 		applicationService.saveOrUpdate(application);
 
 		EmailSend.send("mailNotify@STEMer.com", application.getEmail(), "Notification from: STEMer - Your application status has been updated!", "Notification from: STEMer\nYour application status has been updated!");
-		
+		logger.info("Sent email to "+ application.getEmail());
 		
 		ModelAndView mav = new ModelAndView("applicationDetailed_company");
 		mav.addObject("application", application);
@@ -174,7 +144,7 @@ public class ApplicationController {
 		applicationService.saveOrUpdate(application);
 		
 		EmailSend.send("mailNotify@STEMer.com", application.getEmail(), "Notification from: STEMer - Your application status has been updated!", "Notification from: STEMer\nYour application status has been updated!");
-		
+		logger.info("Sent email to "+ application.getEmail());
 		ModelAndView mav = new ModelAndView("applicationDetailed_company");
 		mav.addObject("application", application);
 		return mav;

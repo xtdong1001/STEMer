@@ -8,7 +8,7 @@
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="index.php" >
+	<a class="navbar-brand" href="${pageContext.request.contextPath}/company/index"" >
 		<img src="${pageContext.request.contextPath}/resources/images/logo_STEMer.png" class="float-left" style="width:60px;" alt="avatar">
 	</a>
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -32,18 +32,16 @@
 		</div>
 	</div>
 </nav>
-<!-- <form action="list_positions_companyside.php" method="post">
+<form action="${pageContext.request.contextPath}/search" method="post">
 <div class="form-row" style="margin-top:86px;background-color:black;padding:10px;">
      <div class="input-group col-10 ml-5 mt-1 mb-1">
-        <input type="text" name="position" class="form-control" placeholder="Search Posted Position" aria-label="Search term" aria-describedby="basic-addon">
+        <input type="text" name="key" class="form-control" aria-label="Search term" aria-describedby="basic-addon">
      </div>
-     
      <div>
 		<input type="submit" class="btn btn-dark col-xs-2 mt-1 mb-1 ml-5" value="Search"/>
-		<input type="hidden" name="submitted" value="TRUE" />
      </div>
 </div>
-</form> -->
+</form>
 
 <script type="text/javascript">
 var url = "${pageContext.request.contextPath}"+"/company/logo";

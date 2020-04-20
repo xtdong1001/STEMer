@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,22 +23,14 @@ import com.xdong.service.IUserAccountService;
 
 @Controller
 public class CompanyAccountController {
+	
+	private static final Logger logger = Logger.getLogger(CompanyAccountController.class);
+	
 	@Autowired
 	IGenericService<CompanyAccount> companyAccountService;
 	
 	@Autowired
 	IUserAccountService<UserAccount> userAccountService;
-	/*
-	 * @RequestMapping(value = "/user/applications", method = RequestMethod.GET)
-	 * public ModelAndView getUserApplications(HttpServletRequest request) {
-	 * if(request.getSession(false) == null ||
-	 * request.getSession(false).getAttribute("userId") == null) return new
-	 * ModelAndView("login"); List applications =
-	 * individualAccountService.getById((int)request.getSession(false).getAttribute(
-	 * "userId")).getApplications(); ModelAndView mav = new
-	 * ModelAndView("applications_user"); mav.addObject("applications",
-	 * applications); return mav; }
-	 */
 	
 	@RequestMapping(value = "/company/loginProcess", method = RequestMethod.POST)
 	public ModelAndView validateUser(@ModelAttribute("userAccount") UserAccount userAccount, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
@@ -52,7 +45,6 @@ public class CompanyAccountController {
 			return new ModelAndView("login", "errMsg", "Email, password or account type is incorrect.");
 		}
 		else {
-			ModelAndView mav =  new ModelAndView("welcome");
 			int uId = userAccountService.getByEmail(userAccount.getEmail()).getUserId();
 			CompanyAccount companyAccount = companyAccountService.getById(uId);
 			Integer companyId = companyAccount.getCompany().getCompanyId();
@@ -61,19 +53,12 @@ public class CompanyAccountController {
 			session.setAttribute("userId", uId);
 			session.setAttribute("accountType", userAccount.getAccountType());
 			session.setAttribute("companyId", companyId);
-
-			return mav;
+			return new ModelAndView("redirect:/company/index");
 		}
 	}
 	
 	@RequestMapping(value = "/company/registerProcess", method = RequestMethod.POST)
-	public ModelAndView addUser(@ModelAttribute("userAccount") UserAccount userAccount, BindingResult result, HttpServletRequest request) {
-		/*
-		 * userAccountService.validate(userAccount, result); if(result.hasErrors()) {
-		 * ModelAndView mav = new ModelAndView("register"); mav.addObject("userAccount",
-		 * new UserAccount()); return mav; }
-		 */
-		
+	public ModelAndView addUser(@ModelAttribute("userAccount") UserAccount userAccount, BindingResult result, HttpServletRequest request) {		
 		if(userAccountService.getByEmail(userAccount.getEmail()) != null) {
 			return new ModelAndView("register", "errMsg", "Email is already used.");
 		}
@@ -89,7 +74,6 @@ public class CompanyAccountController {
 		session.setAttribute("accountType", userAccount.getAccountType());
 		session.setAttribute("companyId", companyId);
 		
-		ModelAndView mav = new ModelAndView("welcome");
-		return mav;
+		return new ModelAndView("redirect:/company/index");
 	}
 }

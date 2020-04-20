@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,8 @@ import com.xdong.service.IGenericService;
 @Controller
 @RequestMapping(value = "/profile")
 public class ProfileController {
+	
+	private static final Logger logger = Logger.getLogger(ProfileController.class);
 
 	@Autowired
 	IGenericService<Profile> profileService;
@@ -81,8 +84,10 @@ public class ProfileController {
 			try {
 				logo.transferTo(file);
 			} catch (IllegalStateException | IOException e) {
+				logger.error(e.getStackTrace());
 				return new ModelAndView("error");
 			}
+			logger.info(filename + " saved successfully.");
 		}
 		
 		profileService.saveOrUpdate(profile);

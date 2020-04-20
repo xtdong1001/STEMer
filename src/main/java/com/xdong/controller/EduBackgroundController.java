@@ -2,6 +2,7 @@ package com.xdong.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,8 @@ import com.xdong.service.IGenericService;
 @Controller
 @RequestMapping(value = "/eduBackground")
 public class EduBackgroundController {
+	
+	private static final Logger logger = Logger.getLogger(EduBackgroundController.class);
 
 	@Autowired
 	IGenericService<EduBackground> eduBackgroundService;
@@ -64,7 +67,4 @@ public class EduBackgroundController {
 		eduBackgroundService.saveOrUpdate(eduBackground);
 		return new ModelAndView("redirect:/profile/" + eduBackground.getProfile().getProfileId());
 	}
-
-	
-
 }

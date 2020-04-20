@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,9 @@ import com.xdong.service.IndividualAccountService;
 
 @Controller
 public class IndividualAccountController {
+	
+	private static final Logger logger = Logger.getLogger(IndividualAccountController.class);
+	
 	@Autowired
 	IGenericService<IndividualAccount> individualAccountService;
 	
@@ -62,17 +66,12 @@ public class IndividualAccountController {
 			session.setAttribute("accountType", userAccount.getAccountType());
 			session.setAttribute("profileId", profileId);
 			System.out.println(userAccount.getAccountType());
-			return new ModelAndView("welcome");
+			return new ModelAndView("redirect:/index");
 		}
 	}
 	
 	@RequestMapping(value = "/individual/registerProcess", method = RequestMethod.POST)
 	public ModelAndView addUser(@ModelAttribute("userAccount") UserAccount userAccount, BindingResult result, HttpServletRequest request) {
-		/*
-		 * userAccountService.validate(userAccount, result); if(result.hasErrors()) {
-		 * ModelAndView mav = new ModelAndView("register"); mav.addObject("userAccount",
-		 * new UserAccount()); return mav; }
-		 */
 		
 		if(userAccountService.getByEmail(userAccount.getEmail()) != null) {
 			return new ModelAndView("register", "errMsg", "Email is already used.");
@@ -90,7 +89,7 @@ public class IndividualAccountController {
 		session.setAttribute("accountType", userAccount.getAccountType());
 		session.setAttribute("profileId", profileId);
 
-		return new ModelAndView("welcome");
+		return new ModelAndView("redirect:/index");
 	}
 	 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,8 @@ import com.xdong.service.IGenericService;
 @Controller
 @RequestMapping(value = "/company")
 public class CompanyController {
+	
+	private static final Logger logger = Logger.getLogger(CompanyController.class);
 
 	@Autowired
 	IGenericService<Company> companyService;
@@ -81,14 +84,6 @@ public class CompanyController {
 		return mav;
 	}
 
-	/*
-	 * @RequestMapping(value = "/add", method = RequestMethod.GET) public
-	 * ModelAndView add() { ModelAndView mav = new ModelAndView("company/form");
-	 * Company company = new Company(); mav.addObject("companyForm", company);
-	 * 
-	 * return mav; }
-	 */
-
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("company") Company company, BindingResult result, HttpServletRequest request) {
 		companyService.validate(company, result);
@@ -111,8 +106,10 @@ public class CompanyController {
 			try {
 				logo.transferTo(file);
 			} catch (IllegalStateException | IOException e) {
+				logger.error(e.getStackTrace());
 				return new ModelAndView("error");
 			}
+			logger.info(filename + " saved successfully.");
 		}
 		
 		companyService.saveOrUpdate(company);

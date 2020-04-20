@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,8 @@ import com.xdong.service.IPositionService;
 @RequestMapping(value = "/position")
 public class PositionController {
 
+	private static final Logger logger = Logger.getLogger(PositionController.class);
+	
 	@Autowired
 	IPositionService<Position> positionService;
 	private static final int MAXPOSITION_USER = 12;
@@ -47,20 +50,6 @@ public class PositionController {
 		model.addObject("currentPage", page);
 		return model;
 	}
-	
-	/*
-	 * @RequestMapping(value = "/list/company/{companyId}/{page}", method =
-	 * RequestMethod.GET) public ModelAndView
-	 * listByCompanyLimit(@PathVariable("companyId") int
-	 * companyId, @PathVariable("page") int page) { List positions =
-	 * positionService.getByCompanyId(companyId, (page-1)*MAXPOSITION_USER,
-	 * MAXPOSITION_USER); int maxpages =
-	 * (int)Math.ceil((double)positionService.getCount()/MAXPOSITION_USER);
-	 * 
-	 * ModelAndView model = new ModelAndView("positions_user");
-	 * model.addObject("positions", positions); model.addObject("pages", maxpages);
-	 * model.addObject("currentPage", page); return model; }
-	 */
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView get(@PathVariable("id") int id) {

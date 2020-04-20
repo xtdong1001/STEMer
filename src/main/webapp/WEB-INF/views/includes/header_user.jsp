@@ -6,7 +6,7 @@
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="index.php" >
+	<a class="navbar-brand" href="${pageContext.request.contextPath}/index"" >
 		<img src="${pageContext.request.contextPath}/resources/images/logo_STEMer.png" class="float-left" style="width:60px;" alt="avatar">
 	</a>
 	<div class="collapse navbar-collapse" id="collapsibleNavbar">

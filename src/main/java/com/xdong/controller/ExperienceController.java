@@ -2,6 +2,7 @@ package com.xdong.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,8 @@ import com.xdong.service.IGenericService;
 @Controller
 @RequestMapping(value = "/experience")
 public class ExperienceController {
+	
+	private static final Logger logger = Logger.getLogger(ExperienceController.class);
 
 	@Autowired
 	IGenericService<Experience> experienceService;
@@ -62,7 +65,4 @@ public class ExperienceController {
 		experienceService.saveOrUpdate(experience);
 		return new ModelAndView("redirect:/profile/" + experience.getProfile().getProfileId());
 	}
-
-	
-
 }
