@@ -28,11 +28,11 @@ public class EduBackground implements java.io.Serializable {
 	private String degree;
 	private String major;
 	private String activity;
-	private Date fromYear;
-	private Date toYear;
+	private String fromYear;
+	private String toYear;
 	private String description;
 
-	@ManyToOne(optional = false,cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="profileId")
 	private Profile profile;
 	
@@ -79,19 +79,19 @@ public class EduBackground implements java.io.Serializable {
 		this.activity = activity;
 	}
 
-	public Date getFromYear() {
+	public String getFromYear() {
 		return this.fromYear;
 	}
 
-	public void setFromYear(Date fromYear) {
+	public void setFromYear(String fromYear) {
 		this.fromYear = fromYear;
 	}
 
-	public Date getToYear() {
+	public String getToYear() {
 		return this.toYear;
 	}
 
-	public void setToYear(Date toYear) {
+	public void setToYear(String toYear) {
 		this.toYear = toYear;
 	}
 

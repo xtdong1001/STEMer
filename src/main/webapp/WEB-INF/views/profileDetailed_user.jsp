@@ -9,7 +9,7 @@
 					style="height: 100px; height: 100px;">
 			</div>
 			<div class="col-sm-10"><h3>${requestScope.profile.firstName } ${requestScope.profile.lastName }</h3> 
-			<a class="button" href="Editprofile_page.php" style="float: right">
+			<a class="button" href="${pageContext.request.contextPath}/profile/update" style="float: right">
 				<i class="fas fa-user-edit"></i>
 			</a> 
 			<br>
@@ -23,7 +23,7 @@
 <div class="card rounded-0"
 	style="margin-left: 15%; max-width: 70%; margin-top: 30px;">
 	<div class="card-header rounded-0" style="background-color: #EFF4F9">
-		Summary</div>
+		<strong>Summary</strong></div>
 		
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">
@@ -39,7 +39,11 @@
 <div class="card rounded-0"
 	style="margin-left: 15%; max-width: 70%; margin-top: 30px;">
 	<div class="card-header rounded-0" style="background-color: #EFF4F9">
-		Experience</div>
+		<strong>Experience</strong>
+		<a class="button" href="${pageContext.request.contextPath}/experience/add" style="float: right">
+			<i class="fas fa-plus-square"></i>
+		</a> 	
+	</div>
 		
 	<c:forEach items="${requestScope.profile.experiences}" var="experience">
 	<ul class="list-group list-group-flush">
@@ -50,7 +54,7 @@
 						style="height: 100px; height: 100px;">
 				</div>
 				<div class="col-sm-7">
-					<h4>${experience.title }</h4>
+					<h5>${experience.title }</h5>
 					<p>
 						${experience.company }<br>${experience.location }
 					</p>
@@ -60,7 +64,11 @@
 							var="fromDate" type="date" pattern="MM/dd/yyyy" />
 				<fmt:formatDate value="${experience.toDate}"
 							var="toDate" type="date" pattern="MM/dd/yyyy" />
-				<div class="col-sm-3"> ${fromDate } - ${toDate }</div>
+				<div class="col-sm-3"> ${fromDate } - ${toDate }
+					<a class="button" href="${pageContext.request.contextPath}/experience/update/${experience.experId }" style="float: right">
+						<i class="fas fa-edit"></i>
+					</a> 
+				</div>
 			</div>
 		</li>
 	</ul>
@@ -71,7 +79,11 @@
 <div class="card rounded-0"
 	style="margin-left: 15%; max-width: 70%; margin-top: 30px;">
 	<div class="card-header rounded-0" style="background-color: #EFF4F9">
-		Education Background</div>
+		<strong>Education Background</strong>
+		<a class="button" href="${pageContext.request.contextPath}/eduBackground/add" style="float: right">
+			<i class="fas fa-plus-square"></i>
+		</a> 	
+	</div>
 		
 	<c:forEach items="${requestScope.profile.educations}" var="education">
 	<ul class="list-group list-group-flush">
@@ -82,17 +94,18 @@
 						style="height: 100px; height: 100px;">
 				</div>
 				<div class="col-sm-8">
-					<h4>${education.university }</h4>
+					<h5>${education.university }</h5>
 					<p>
 						${education.degree }<br>${education.major }
 					</p>
 					<p>${education.description }</p>
 				</div>
-				<fmt:formatDate value="${education.fromYear}"
-							var="fromDate" type="date" pattern="yyyy" />
-				<fmt:formatDate value="${education.toYear}"
-							var="toDate" type="date" pattern="yyyy" />
-				<div class="col-sm-2"> ${fromDate } - ${toDate }</div>
+
+				<div class="col-sm-2"> ${education.fromYear } - ${education.toYear }
+					<a class="button" href="${pageContext.request.contextPath}/eduBackground/update/${education.eduBgId }" style="float: right">
+						<i class="fas fa-edit"></i>
+					</a> 
+				</div>
 			</div>
 		</li>
 	</ul>
@@ -103,16 +116,25 @@
 <div class="card rounded-0"
 	style="margin-left: 15%; max-width: 70%; margin-top: 30px;">
 	<div class="card-header rounded-0" style="background-color: #EFF4F9">
-		Skills</div>
+		<strong>Skills</strong>
+		<a class="button" href="${pageContext.request.contextPath}/skill/add" style="float: right">
+			<i class="fas fa-plus-square"></i>
+		</a> 		
+	</div>
 		
 	<c:forEach items="${requestScope.profile.skills}" var="skill">
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">
 			<div class="row">
 				<div class="col-sm-12">
-					<h4>${skill.name }</h4>
+					<a class="button" href="${pageContext.request.contextPath}/skill/update/${skill.skillId }" style="float: right">
+						<i class="fas fa-edit"></i>
+					</a> 
+					<h5>${skill.name }</h5>
 					<p>${skill.skillContent }</p>
+					
 				</div>
+				
 			</div>
 		</li>
 	</ul>

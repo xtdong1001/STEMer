@@ -23,7 +23,7 @@ public class Skill implements java.io.Serializable {
 	private String name;
 	private String skillContent;
 	
-	@ManyToOne(optional = false,cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="profileId")
 	private Profile profile;
 

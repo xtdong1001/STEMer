@@ -13,7 +13,9 @@ public class ProfileValidator implements Validator {
 
 	private static final String ZIP_PATTERN = "^[0-9]{5}(?:-[0-9]{4})?$";
 	private static final String IMAGE_PATTERN = "^(jpg|png|gif|bmp)$";
-	private static final String YEAR_PATTERN = "^[0-9]{4}$";
+	private static final String EMAIL_PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+	private static final String PHONE_PATTERN = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+	
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -28,19 +30,16 @@ public class ProfileValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmpty(errors, "firstName", "emptyFN", "Please input the first name.");
 		ValidationUtils.rejectIfEmpty(errors, "lastName", "emptyLN", "Please input the last name.");
-		ValidationUtils.rejectIfEmpty(errors, "phone", "emptyPhone", "Please input the phone number.");
+		ValidationUtils.rejectIfEmpty(errors, "email", "emptyEmail", "Please input the email address.");
 		
-		String emailRegex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-		String phoneRegex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
-		String zipRegex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		
-		if(profile.getEmail() != null && !profile.getEmail().matches(emailRegex)) {
+		if(profile.getEmail() != null && !profile.getEmail().matches(EMAIL_PATTERN)) {
 			errors.rejectValue("email", "errorEmail", "Please input a valid email");
 		}
-		if(profile.getZipcode() != null && !profile.getZipcode().equals("") && !profile.getZipcode().matches(zipRegex)) {
+		if(profile.getZipcode() != null && !profile.getZipcode().equals("") && !profile.getZipcode().matches(ZIP_PATTERN)) {
 			errors.rejectValue("zipcode", "errorZip", "Please input a valid zip code");
 		}
-		if(profile.getPhone() != null && !profile.getPhone().equals("") && !profile.getPhone().matches(phoneRegex)) {
+		if(profile.getPhone() != null && !profile.getPhone().equals("") && !profile.getPhone().matches(PHONE_PATTERN)) {
 			errors.rejectValue("phone", "errorPhone", "Please input a valid phone number");
 		}
 		

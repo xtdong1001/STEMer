@@ -31,7 +31,7 @@ public class Profile implements java.io.Serializable {
 	@Column(name="firstName")
 	private String firstName;
 	private String lastName;
-	private String Headline;
+	private String headline;
 	private String email;
 	private String phone;
 	private String address;
@@ -91,11 +91,11 @@ public class Profile implements java.io.Serializable {
 	}
 
 	public String getHeadline() {
-		return Headline;
+		return headline;
 	}
 
 	public void setHeadline(String headline) {
-		Headline = headline;
+		this.headline = headline;
 	}
 
 	public String getEmail() {

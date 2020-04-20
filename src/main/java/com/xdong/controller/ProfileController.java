@@ -86,7 +86,7 @@ public class ProfileController {
 		}
 		
 		profileService.saveOrUpdate(profile);
-		return new ModelAndView("redirect:/profile/mine");
+		return new ModelAndView("redirect:/profile/"+profile.getProfileId());
 	}
 	
 	@ResponseBody

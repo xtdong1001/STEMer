@@ -26,7 +26,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors (InterceptorRegistry registry) {
-		registry.addInterceptor(new IndividualPermissionInterceptor()).addPathPatterns("/application/*", "/user/*", "/apply/*");
+		registry.addInterceptor(new IndividualPermissionInterceptor()).addPathPatterns("/application/*", "/user/*", "/apply/*", 
+				"/profile/update", "/profile/save", "/experience/*", "/eduBackground/*", "/skill/*");
 		registry.addInterceptor(new CompanyPermissionInterceptor())
 		.addPathPatterns("/position/company/*", "/position/add", "/position/update/*", "/position/save", "/company/mine", 
 				"/company/update", "/company/save", "/company/index", "/company/application/*", "/company/schedule/*", "/company/reject/");

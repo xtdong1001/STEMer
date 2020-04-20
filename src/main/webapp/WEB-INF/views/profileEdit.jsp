@@ -1,16 +1,30 @@
 <%@ include file="includes/header.jsp"%>
+<img src="${pageContext.request.contextPath}/resources/images/bg_user.jpg" style="height: 100%; width: 100%">
+
 <form:form method="post"
-	action="${pageContext.request.contextPath}/application/submit"
-	modelAttribute="application" enctype="multipart/form-data">
+	action="${pageContext.request.contextPath}/profile/save"
+	modelAttribute="profile" enctype="multipart/form-data">
 	<!-- 	<div class="card"
 		style="margin-left: 15%; max-width: 70%; margin-top: 30px; padding: 4%;"> -->
 	<div>
 		<div style="width: 100%; text-align: center; padding-top: 30px;">
-			<h1>Application</h1>
+			<h1>Profile</h1>
 		</div>
 
 		<div class="apply_card card">
 			<div class="container-fluid">
+				<div class="row">
+					<div class="form-group col-lg-12 mb-4 ">
+						<label>Portrait:</label>
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="portrait"
+								name="portrait" /> <label class="custom-file-label" id="portrait"
+								for="portrait">Choose file</label>
+						</div>
+						<form:errors id='portraitErr' path="portrait"
+						style="color:red;font-size:80%;"></form:errors>
+					</div>
+				</div>	
 				<div class="row">
 					<div class="form-group col-lg-6 mb-4">
 						<form:label for="firstName" path="firstName">First Name*:</form:label>
@@ -29,6 +43,13 @@
 				</div>
 				<div class="row">
 					<div class="form-group col-lg-12 mb-4">
+						<form:label path="headline">Headline:</form:label>
+						<form:textarea class="form-control" path="headline"
+							name="headline" rows="3"></form:textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-12 mb-4">
 						<form:label path="email">Email*:</form:label>
 						<form:input type="text" class="form-control" id="email"
 							placeholder="xxx@domain.com" path="email" name="email" />
@@ -38,7 +59,7 @@
 				</div>
 				<div class="row">
 					<div class="form-group col-lg-12 mb-4">
-						<form:label path="phone">Phone*:</form:label>
+						<form:label path="phone">Phone:</form:label>
 						<form:input type="text" class="form-control" id="phone"
 							placeholder="(xxx)-xxx-xxxx" path="phone" name="phone" />
 						<form:errors id='phoneErr' path="phone"
@@ -85,44 +106,20 @@
 	</div>
 	<div class="apply_card card">
 		<div class="container-fluid">
-			<br>
-			<div class="row">
-				<div class="form-group col-lg-12 mb-4 ">
-					<label>Resume:</label>
-					<div class="custom-file">
-						<input type="file" class="custom-file-input" id="customFile"
-							name="resume" /> <label class="custom-file-label"
-							for="customFile">Choose file</label>
-
-					</div>
-					<form:errors id='resumeErr' path="resume"
-						style="color:red;font-size:80%;"></form:errors>
-				</div>
-			</div>
-
-
-
-			<div class="row">
-				<div class="form-group col-lg-4 mb-4">
-					<form:label path="workBeginDate">Begin Date:</form:label>
-					<form:input type="text" class="form-control" id="workBeginDate"
-						placeholder="MM/DD/YYYY" path="workBeginDate" name="workBeginDate" />
-				</div>
-			</div>
-
 			<div class="row">
 				<div class="form-group col-lg-12 mb-4">
-					<form:label path="website">Website, Blog or Portfolio:</form:label>
-					<form:input type="text" class="form-control" id="website"
-						placeholder="website" path="website" name="website" />
+					<form:label path="summary">Summary:</form:label>
+					<form:textarea class="form-control" path="summary"
+						name="summary" rows="5"></form:textarea>
 				</div>
 			</div>
 		</div>
 	</div>
-	<form:input type="hidden" path="position.positionId" name="positionId"
-		value="${requestScope.positionId }" />
-	<form:input type="hidden" path="userAccount.userId" name="userId"
-		value="${sessionScope.userId }" />
+	<form:input type="hidden" path="profileId" name="profileId"
+		value="${requestScope.profile.profileId }" />
+	<form:input type="hidden" path="portraitPath" name="portraitPath"
+		value="${requestScope.profile.portraitPath }" />
+
 	<p align="center">
 		<input class="btn btn-primary" type="submit" name="submit"
 			value="Submit" />
@@ -136,18 +133,6 @@
 				$(this).siblings(".custom-file-label").addClass("selected")
 						.html(fileName);
 			});
-	$(document).ready(
-			function() {
-				var date_input = $('input[name="workBeginDate"]'); //our date input has the name "date"
-				var container = $('.bootstrap-iso form').length > 0 ? $(
-						'.bootstrap-iso form').parent() : "body";
-				var options = {
-					format : 'mm/dd/yyyy',
-					container : container,
-					todayHighlight : true,
-					autoclose : true,
-				};
-				date_input.datepicker(options);
-			});
 </script>
+
 <%@ include file="includes/footer.jsp"%>
