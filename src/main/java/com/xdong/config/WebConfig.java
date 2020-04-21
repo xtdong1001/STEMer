@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import com.xdong.interceptor.CompanyPermissionInterceptor;
+import com.xdong.interceptor.CookiesInterceptor;
 import com.xdong.interceptor.IndividualPermissionInterceptor;
 
 @Configuration
@@ -28,6 +29,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors (InterceptorRegistry registry) {
+		registry.addInterceptor(new CookiesInterceptor()).excludePathPatterns("/register", "/login", "/logout", "/individual/*", "/company/loginProcess", "/company/registerProcess");
 		registry.addInterceptor(new IndividualPermissionInterceptor()).addPathPatterns("/application/*", "/user/*", "/apply/*", 
 				"/profile/update", "/profile/save", "/experience/*", "/eduBackground/*", "/skill/*");
 		registry.addInterceptor(new CompanyPermissionInterceptor())

@@ -19,11 +19,11 @@ public class CompanyAccount extends UserAccount {
 		
 	}
 	
-	public CompanyAccount(UserAccount userAccount) {
-		this.setPassword(userAccount.getPassword());
-		this.setAccountType(userAccount.getAccountType());
-		this.setEmail(userAccount.getEmail());
-		this.company = new Company("/resources/images/company_logo2.png");
+	public CompanyAccount(RegisterAccount registerAccount) {
+		this.setPassword(registerAccount.getPassword());
+		this.setAccountType(registerAccount.getAccountType());
+		this.setEmail(registerAccount.getEmail());
+		this.company = new Company("company_logo2.png");
 	}
 
 	public Company getCompany() {

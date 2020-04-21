@@ -142,6 +142,12 @@
 								<span id='passwordErr1' style="color: red; font-size: 80%;"></span>
 							<form:errors path="password" style="color: red; font-size: 80%;" ></form:errors>
 						</div>
+						
+						<div class="row">
+							<input type="checkbox" id="individualCookies" name="individualCookies" value="true"> 
+							<label style="font-size: 14px;">Remember me</label>
+						</div>
+						
 						<form:input type="hidden" path="accountType" value="Individual" />
 
 						<br>
@@ -176,6 +182,11 @@
 								id="password2" name="password" path="password" placeholder="Password" />
 								<span id='passwordErr2'  style="color: red; font-size: 80%;"></span>
 								<form:errors path="password" style="color: red; font-size: 80%;"></form:errors>
+						</div>
+						
+						<div class="row">
+							<input type="checkbox" id="companyCookies" name="companyCookies" value="true"> 
+							<label style="font-size: 14px;">Remember me</label>
 						</div>
 
 						<form:input type="hidden" path="accountType" value="Company" />

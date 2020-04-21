@@ -35,9 +35,12 @@ public class ProfileDao implements IGenericDao<Profile>{
 	@Override
 	public Profile getById(int id) {
 		Profile profile = (Profile)getSession().get(Profile.class, id);
-		profile.getExperiences().size();
-		profile.getEducations().size();
-		profile.getSkills().size();
+		if(profile.getExperiences()!= null)
+			profile.getExperiences().size();
+		if(profile.getEducations()!= null)
+			profile.getEducations().size();
+		if(profile.getSkills()!= null)
+			profile.getSkills().size();
 		return profile;
 	}
 

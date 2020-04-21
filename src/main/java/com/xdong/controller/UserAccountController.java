@@ -1,5 +1,6 @@
 package com.xdong.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xdong.model.RegisterAccount;
 import com.xdong.model.UserAccount;
 import com.xdong.service.IUserAccountService;
 
@@ -22,8 +24,8 @@ public class UserAccountController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView showRegister() {
 		ModelAndView mav = new ModelAndView("register");
-		UserAccount userAccount = new UserAccount();
-		mav.addObject("userAccount", userAccount);
+		RegisterAccount registerAccount = new RegisterAccount();
+		mav.addObject("registerAccount", registerAccount);
 		return mav;
 	}
 	
@@ -36,7 +38,16 @@ public class UserAccountController {
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request) {
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+		//delete cookies
+		for (Cookie cookie : request.getCookies()) {
+		    if(cookie.getName().equals("userId") 
+		    		|| cookie.getName().equals("accountType") || cookie.getName().equals("Id")) {
+		    	cookie.setMaxAge(0);
+		    	response.addCookie(cookie);
+		    }
+		}
+		
 		if(request.getSession(false) == null || request.getSession(false).getAttribute("userId") == null)
 			return new ModelAndView("redirect:/company/index");
 		request.getSession(false).invalidate();

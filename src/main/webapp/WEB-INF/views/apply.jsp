@@ -88,7 +88,7 @@
 			<br>
 			<div class="row">
 				<div class="form-group col-lg-12 mb-4 ">
-					<label>Resume:</label>
+					<label>Resume(PDF):</label>
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="customFile"
 							name="resume" /> <label class="custom-file-label"
@@ -121,7 +121,7 @@
 	</div>
 	<form:input type="hidden" path="position.positionId" name="positionId"
 		value="${requestScope.positionId }" />
-	<form:input type="hidden" path="userAccount.userId" name="userId"
+	<form:input type="hidden" path="individualAccount.userId" name="userId"
 		value="${sessionScope.userId }" />
 	<p align="center">
 		<input class="btn btn-primary" type="submit" name="submit"

@@ -33,7 +33,8 @@ public class PositionDao implements IPositionDao<Position>{
 	@Override
 	public Position getById(int id) {
 		Position position = (Position)getSession().get(Position.class, id);
-		position.getApplications().size();
+		if(position.getApplications()!=null)
+			position.getApplications().size();
 		return position;
 	}
 

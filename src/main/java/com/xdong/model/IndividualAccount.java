@@ -35,10 +35,10 @@ public class IndividualAccount extends UserAccount {
 	public IndividualAccount() {
 	}
 	
-	public IndividualAccount(UserAccount userAccount) {
-		this.setPassword(userAccount.getPassword());
-		this.setAccountType(userAccount.getAccountType());
-		this.setEmail(userAccount.getEmail());
+	public IndividualAccount(RegisterAccount registerAccount) {
+		this.setPassword(registerAccount.getPassword());
+		this.setAccountType(registerAccount.getAccountType());
+		this.setEmail(registerAccount.getEmail());
 		this.profile = new Profile("portrait_user.png");
 	}
 	

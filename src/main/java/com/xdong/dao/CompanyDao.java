@@ -34,7 +34,8 @@ public class CompanyDao implements IGenericDao<Company>{
 	@Override
 	public Company getById(int id) {
 		Company company = (Company)getSession().get(Company.class, id);
-		company.getPositions().size();
+		if(company.getPositions()!= null)
+			company.getPositions().size();
 		return company;
 	}
 

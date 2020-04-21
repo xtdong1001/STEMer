@@ -141,6 +141,13 @@
 		}
 		return result;
 	}
+	$(document).ready(function() {
+		$('#password_individual').tooltip({'trigger':'focus', 'title': 'Be between 8 and 40 characters long. Contain at least one digit. Contain at least one lower case character. Contain at least one upper case character. Contain at least on special character from [ @ # $ % ! . ]'});
+		$('#password_company').tooltip({'trigger':'focus', 'title': 'Be between 8 and 40 characters long. Contain at least one digit. Contain at least one lower case character. Contain at least one upper case character. Contain at least on special character from [ @ # $ % ! . ]'});
+		
+	});
+	
+	
 </script>
 </head>
 <body>
@@ -161,7 +168,7 @@
 				<div id="Individual" class="container tab-pane active">
 					<br>
 					<form:form method="post"
-						action="${pageContext.request.contextPath}/individual/registerProcess" modelAttribute="userAccount">
+						action="${pageContext.request.contextPath}/individual/registerProcess" modelAttribute="registerAccount">
 						<span style="color: red; font-size: 80%;">${requestScope.errMsg }</span>
 						<div class="row">
 							<label class="mr-sm-2 mb-0" for="Email"><strong>Email
@@ -169,28 +176,34 @@
 								class="form-control mr-sm-2 mb-2 mb-sm-0" id="email_individual"
 								path="email" placeholder="Email Address" /> <span
 								id='emailErr_individual' style="color: red; font-size: 80%;"></span>
+								<form:errors path="email" style="color: red; font-size: 80%;" ></form:errors>
 						</div>
 						<div class="row">
 							<label class="mr-sm-2 mb-0" for="password_individual"><strong>Password:</strong></label>
-							<form:input type="password" class="form-control mr-sm-2 mb-2 mb-sm-0"
+							
+							<form:input type="password" class="form-control mr-sm-2 mb-2 mb-sm-0" data-placement="bottom"
 								id="password_individual" path="password" placeholder="Password" />
 								<span id='passwordErr_individual'
 								style="color: red; font-size: 80%;"></span>
+								<form:errors path="password" style="color: red; font-size: 80%;" ></form:errors>
 						</div>
 						<div class="row">
 							<label class="mr-sm-2 mb-0" for="password2_individual"><strong>Confirm
-									Password:</strong></label> <input type="password"
-								class="form-control mr-sm-2 mb-2 mb-sm-0" id="password2_individual"
-								placeholder="Confirm Password"> <span id='passwordErr2_individual'
+									Password:</strong></label> <form:input type="password"
+								class="form-control mr-sm-2 mb-2 mb-sm-0" id="password2_individual" path="password2"
+								placeholder="Confirm Password"></form:input> <span id='passwordErr2_individual'
 								style="color: red; font-size: 80%;"></span>
+								<form:errors path="password2" style="color: red; font-size: 80%;" ></form:errors>
 						</div>
 
 						<div class="row">
-							<input type="checkbox" id="agreement" name="agreement"> <label
+							<input type="checkbox" id="agreement" name="agreement" >
+							<label
 								style="font-size: 12px;">I agree to STEMer <a href="#">Terms</a>
 								and <a href="#">Privacy Policy</a>.
 							</label> <span id='checkErr_individual' style="color: red; font-size: 80%;"></span>
 						</div>
+						
 						<form:input type="hidden" path="accountType" value="Individual" />
 						<br>
 						<div class="btn-style">
@@ -208,7 +221,7 @@
 				<div id="Company" class="container tab-pane fade">
 					<br>
 					<form:form method="post"
-						action="${pageContext.request.contextPath}/company/registerProcess" modelAttribute="userAccount">
+						action="${pageContext.request.contextPath}/company/registerProcess" modelAttribute="registerAccount">
 						<span style="color: red; font-size: 80%;">${requestScope.errMsg }</span>
 						<div class="row">
 							<label class="mr-sm-2 mb-0" for="Email"><strong>Email
@@ -216,20 +229,23 @@
 								class="form-control mr-sm-2 mb-2 mb-sm-0" id="email_company"
 								path="email" placeholder="Email Address" /> <span
 								id='emailErr_company' style="color: red; font-size: 80%;"></span>
+								<form:errors path="email" style="color: red; font-size: 80%;" ></form:errors>
 						</div>
 						<div class="row">
 							<label class="mr-sm-2 mb-0" for="password_company"><strong>Password:</strong></label>
-							<form:input type="password" class="form-control mr-sm-2 mb-2 mb-sm-0"
+							<form:input type="password" class="form-control mr-sm-2 mb-2 mb-sm-0" data-placement="bottom"
 								id="password_company" path="password" placeholder="Password" />
 								<span id='passwordErr_company'
 								style="color: red; font-size: 80%;"></span>
+								<form:errors path="password" style="color: red; font-size: 80%;" ></form:errors>
 						</div>
 						<div class="row">
 							<label class="mr-sm-2 mb-0" for="password2_company"><strong>Confirm
-									Password:</strong></label> <input type="password"
+									Password:</strong></label> <form:input type="password" path="password2"
 								class="form-control mr-sm-2 mb-2 mb-sm-0" id="password2_company"
-								placeholder="Confirm Password"> <span id='passwordErr2_company'
+								placeholder="Confirm Password"></form:input> <span id='passwordErr2_company'
 								style="color: red; font-size: 80%;"></span>
+								<form:errors path="password2" style="color: red; font-size: 80%;" ></form:errors>
 						</div>
 
 						<div class="row">
@@ -238,6 +254,8 @@
 								and <a href="#">Privacy Policy</a>.
 							</label> <span id='checkErr_company' style="color: red; font-size: 80%;"></span>
 						</div>
+						
+						
 						<form:input type="hidden" path="accountType" value="Company" />
 						<br>
 						<div class="btn-style">

@@ -118,7 +118,7 @@ public class ApplicationController {
 		application.setResult("Interview Scheduled");
 		application.setInterviewLocation(request.getParameter("interviewLocation"));
 		application.setComments(request.getParameter("comments"));
-		SimpleDateFormat fmt = new SimpleDateFormat("mm/dd/yyyy");
+		SimpleDateFormat fmt = new SimpleDateFormat("MM/dd/yyyy");
 		try {
 			application.setInterviewTime(fmt.parse(request.getParameter("interviewTime")));
 		} catch (ParseException e) {
@@ -130,12 +130,10 @@ public class ApplicationController {
 		EmailSend.send("mailNotify@STEMer.com", application.getEmail(), "Notification from: STEMer - Your application status has been updated!", "Notification from: STEMer\nYour application status has been updated!");
 		logger.info("Sent email to "+ application.getEmail());
 		
-		ModelAndView mav = new ModelAndView("applicationDetailed_company");
-		mav.addObject("application", application);
-		return mav;
+		return new ModelAndView("redirect:/company/application/"+application.getApplicationId());
 	}
 	
-	@RequestMapping(value = "/company/reject/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/company/reject/{id}", method = RequestMethod.POST)
 	public ModelAndView reject(@PathVariable("id") int id, HttpServletRequest request) {
 		Application application = applicationService.getById(id);
 		application.setStatus("Decided");
@@ -145,9 +143,7 @@ public class ApplicationController {
 		
 		EmailSend.send("mailNotify@STEMer.com", application.getEmail(), "Notification from: STEMer - Your application status has been updated!", "Notification from: STEMer\nYour application status has been updated!");
 		logger.info("Sent email to "+ application.getEmail());
-		ModelAndView mav = new ModelAndView("applicationDetailed_company");
-		mav.addObject("application", application);
-		return mav;
+		return new ModelAndView("redirect:/company/application/"+application.getApplicationId());
 	}
 
 }

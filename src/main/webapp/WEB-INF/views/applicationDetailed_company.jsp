@@ -69,7 +69,7 @@
 							style="width: 185px" id="btnAccept">Schedule an
 							Interview</button>
 						<button type="button" class="btn btn-outline-danger"
-							style="width: 185px"  data-toggle="modal" data-target="#myModal">Reject</button>
+							style="width: 185px"  id="btnReject">Reject</button>
 					</c:when>
 					<c:when test="${requestScope.application.result == 'Rejected'}">
 						<p style="color: red">Rejected</p>
@@ -97,7 +97,8 @@
 						<p>
 							<b>Date</b>
 						</p>
-						<p>${requestScope.application.interviewTime}</p>
+						<fmt:formatDate value="${requestScope.application.interviewTime}" var="interviewDate" pattern="MM/dd/yyyy" />
+						<p>${interviewDate}</p>
 						<p>
 							<b>Location</b>
 						</p>
@@ -143,7 +144,7 @@
 		<div class="row">
 			<div class="form-group col-lg-4 mb-4">
 				<label>Interview Time:</label> <input type="text"
-					class="form-control" placeholder="MM/DD/YYYY"
+					class="form-control" placeholder="MM/dd/yyyy"
 					name="interviewTime" />
 			</div>
 		</div>
@@ -168,7 +169,7 @@
 	</div>
 
 </div>
-<div class="card rounded-0" id="interviewForm"
+<div class="card rounded-0" id="rejectForm"
 	style="margin-left: 15%; max-width: 70%; margin-top: 30px;display: none;">
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item" style="background-color: #EFF4F9">
@@ -177,7 +178,7 @@
 
 	<div class="container-fluid">
 <form method="post"
-	action="${pageContext.request.contextPath}/company/schedule/${requestScope.application.applicationId}"
+	action="${pageContext.request.contextPath}/company/reject/${requestScope.application.applicationId}"
 	">
 		
 		<div class="row">

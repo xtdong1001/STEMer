@@ -30,7 +30,8 @@ public class IndividualAccountDao implements IGenericDao<IndividualAccount>{
 	@Override
 	public IndividualAccount getById(int id) {
 		IndividualAccount individualAccount = (IndividualAccount)getSession().get(IndividualAccount.class, id);
-		individualAccount.getApplications().size();
+		if(individualAccount.getApplications() != null)
+			individualAccount.getApplications().size();
 		return individualAccount;
 	}
 
